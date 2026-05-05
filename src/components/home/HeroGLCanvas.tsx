@@ -58,19 +58,24 @@ void main(){
   float n3 = snoise(pos * 5.2 + vec2(t*.28, -t*.55) + n2*.18);
   float noise = (n1*.5 + n2*.3 + n3*.2) * .5 + .5;
 
-  // corner glow (top-right)
-  vec2 corner = vec2(ar*.5, -.5);
-  float cDist  = length(pos - corner);
-  float cGlow  = smoothstep(.9, 0., cDist) * .12;
+  // corner glow (top-right) — primary
+  vec2 corner1 = vec2(ar*.5, -.5);
+  float cDist1 = length(pos - corner1);
+  float cGlow1 = smoothstep(1.2, 0., cDist1) * .24;
+
+  // ambient glow (bottom-left) — secondary, cooler
+  vec2 corner2 = vec2(-ar*.48, .42);
+  float cDist2 = length(pos - corner2);
+  float cGlow2 = smoothstep(.75, 0., cDist2) * .09;
 
   // mouse glow
   vec2 mWorld = uMouse * vec2(ar*.5, .5);
   float mDist  = length(pos - mWorld);
-  float mGlow  = smoothstep(.55, 0., mDist) * .14;
+  float mGlow  = smoothstep(.72, 0., mDist) * .28;
 
   // combine
-  float alpha = noise * .055 + cGlow + mGlow;
-  alpha = clamp(alpha, 0., .22);
+  float alpha = noise * .08 + cGlow1 + cGlow2 + mGlow;
+  alpha = clamp(alpha, 0., .34);
 
   vec3 lime = vec3(.749, 1., 0.);
   vec3 col  = mix(vec3(.031), lime, alpha);

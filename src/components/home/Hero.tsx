@@ -78,7 +78,6 @@ export default function Hero() {
         minHeight: '100svh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end',
         overflow: 'hidden',
       }}
     >
@@ -125,6 +124,9 @@ export default function Hero() {
         001 / HERO
       </div>
 
+      {/* Spacer: fills available space, but never shrinks below nav height */}
+      <div aria-hidden="true" style={{ flex: '1 1 0', minHeight: 'clamp(5rem, 10vh, 7rem)' }} />
+
       {/* Content */}
       <div style={{ position: 'relative', zIndex: 1, padding: '0 var(--space-container)' }}>
         {/* Main headline */}
@@ -133,22 +135,22 @@ export default function Hero() {
           style={{
             fontFamily: 'var(--font-syne)',
             fontWeight: 800,
-            fontSize: 'var(--text-hero)',
-            lineHeight: 'var(--lh-hero)',
-            letterSpacing: '-0.04em',
+            fontSize: 'clamp(2rem, 7.5vw, 7rem)',
+            lineHeight: 1.02,
+            letterSpacing: '-0.03em',
             color: '#F0F0EE',
-            marginBottom: 'clamp(2rem,4vh,3rem)',
+            marginBottom: 'clamp(1.75rem,3.5vh,2.75rem)',
           }}
         >
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.1em' }}>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.08em' }}>
             <span ref={line1Ref} style={{ display: 'block' }}>Il&nbsp;digitale</span>
           </span>
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.1em' }}>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.08em' }}>
             <span ref={line2Ref} style={{ display: 'block' }}>
-              che&nbsp;<span style={{ WebkitTextStroke: '2px #BFFF00', color: 'transparent' }}>lavora</span>
+              che&nbsp;<span style={{ WebkitTextStroke: '1.5px #BFFF00', color: 'transparent' }}>lavora</span>
             </span>
           </span>
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.15em' }}>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.12em' }}>
             <span ref={line3Ref} style={{ display: 'block' }}>per&nbsp;te.</span>
           </span>
         </h1>
@@ -169,7 +171,7 @@ export default function Hero() {
               fontFamily: 'var(--font-inter)',
               fontWeight: 500,
               fontSize: 'var(--text-sm)',
-              color: 'rgba(240,240,238,0.5)',
+              color: 'rgba(240,240,238,0.6)',
               letterSpacing: '0.01em',
             }}
           >
@@ -253,7 +255,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom spacer */}
-      <div style={{ height: 'clamp(2rem,4vh,3rem)', position: 'relative', zIndex: 1 }} />
+      <div style={{ height: 'clamp(2.5rem,5vh,4rem)', position: 'relative', zIndex: 1 }} />
 
       {/* Scroll indicator */}
       <div
