@@ -134,21 +134,21 @@ export default function Hero() {
             fontFamily: 'var(--font-syne)',
             fontWeight: 800,
             fontSize: 'var(--text-hero)',
-            lineHeight: 0.92,
-            letterSpacing: '-0.03em',
+            lineHeight: 'var(--lh-hero)',
+            letterSpacing: '-0.04em',
             color: '#F0F0EE',
             marginBottom: 'clamp(2rem,4vh,3rem)',
           }}
         >
-          <span style={{ display: 'block', overflow: 'hidden' }}>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.1em' }}>
             <span ref={line1Ref} style={{ display: 'block' }}>Il&nbsp;digitale</span>
           </span>
-          <span style={{ display: 'block', overflow: 'hidden' }}>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.1em' }}>
             <span ref={line2Ref} style={{ display: 'block' }}>
               che&nbsp;<span style={{ WebkitTextStroke: '2px #BFFF00', color: 'transparent' }}>lavora</span>
             </span>
           </span>
-          <span style={{ display: 'block', overflow: 'hidden' }}>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.15em' }}>
             <span ref={line3Ref} style={{ display: 'block' }}>per&nbsp;te.</span>
           </span>
         </h1>
@@ -166,22 +166,23 @@ export default function Hero() {
         >
           <p
             style={{
-              fontFamily: 'var(--font-jetbrains)',
-              fontSize: 'var(--text-xs)',
-              color: 'rgba(240,240,238,0.35)',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
+              fontFamily: 'var(--font-inter)',
+              fontWeight: 500,
+              fontSize: 'var(--text-sm)',
+              color: 'rgba(240,240,238,0.5)',
+              letterSpacing: '0.01em',
             }}
           >
             Brian Gastaldelli&nbsp;·&nbsp;Verona
           </p>
-          <span style={{ width: 40, height: 1, background: 'rgba(255,255,255,0.12)', flexShrink: 0 }} />
+          <span style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.12)', flexShrink: 0 }} />
           <p
             style={{
               fontFamily: 'var(--font-jetbrains)',
+              fontWeight: 400,
               fontSize: 'var(--text-xs)',
-              color: 'rgba(240,240,238,0.35)',
-              letterSpacing: '0.08em',
+              color: 'rgba(240,240,238,0.3)',
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
             }}
           >
@@ -193,7 +194,7 @@ export default function Hero() {
         <div ref={ctaRef} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
           <a
             ref={primaryBtnRef}
-            href="#esempi"
+            href="#lavori"
             style={{
               display: 'inline-flex',
               alignItems: 'center',

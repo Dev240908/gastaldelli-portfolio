@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3040",
+  "date": "2026-05-05T15:57:32.617Z",
+  "totalIssues": 0,
+  "bySeverity": {
+    "CRITICAL": 0,
+    "HIGH": 0,
+    "MEDIUM": 0,
+    "LOW": 0
+  },
+  "issues": []
+}

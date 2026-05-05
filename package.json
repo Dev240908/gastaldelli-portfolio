@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "audit:lighthouse": "npx lighthouse http://localhost:3040 --output html --output-path scripts/audit-output/lighthouse --chrome-flags=\"--headless --no-sandbox\"",
+    "audit:axe": "axe http://localhost:3040 --chromedriver-path \"%USERPROFILE%\\.browser-driver-manager\\chromedriver\\win64-148.0.7778.97\\chromedriver-win64\\chromedriver.exe\"",
+    "audit:ai": "node scripts/ui-audit.mjs",
+    "audit": "npm run audit:lighthouse && npm run audit:axe && npm run audit:ai"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.93.0",
     "@gsap/react": "^2.1.0",
+    "@midscene/web": "^1.7.7",
     "@react-three/drei": "^9.0.0",
     "@react-three/fiber": "^9.0.0",
     "@react-three/postprocessing": "^3.0.4",
@@ -18,6 +24,7 @@
     "lenis": "^1.1.0",
     "motion": "^12.0.0",
     "next": "^15.3.0",
+    "puppeteer": "^24.42.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "three": "^0.171.0",
@@ -25,14 +32,16 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
-    "@tailwindcss/postcss": "^4.0.0",
+    "@playwright/test": "^1.59.1",
+    "@tailwindcss/postcss": "^4.2.4",
     "@types/node": "^20.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/three": "^0.171.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.0.0",
-    "tailwindcss": "^4.0.0",
+    "playwright": "^1.59.1",
+    "tailwindcss": "^4.2.4",
     "typescript": "^5.4.0"
   }
 }

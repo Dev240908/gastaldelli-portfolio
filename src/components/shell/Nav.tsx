@@ -50,13 +50,14 @@ export default function Nav() {
 
       <nav style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
         {[
-          { href: '/#esempi', label: 'Lavori' },
+          { href: '/#lavori', label: 'Lavori' },
           { href: '/#about', label: 'About' },
           { href: '/#contatti', label: 'Contatti' },
         ].map(({ href, label }) => (
           <Link
             key={href}
             href={href}
+            className="nav-link"
             style={{
               fontFamily: 'var(--font-jetbrains)',
               fontSize: '0.6875rem',
@@ -88,6 +89,7 @@ export default function Nav() {
             color: '#BFFF00',
             textDecoration: 'none',
             transition: 'background 200ms, color 200ms',
+            flexShrink: 0,
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = '#BFFF00'
@@ -101,6 +103,12 @@ export default function Nav() {
           Hire me
         </a>
       </nav>
+      <style>{`
+        @media (max-width: 640px) {
+          .nav-link { display: none !important; }
+          header nav { gap: 0 !important; }
+        }
+      `}</style>
     </motion.header>
   )
 }

@@ -43,7 +43,7 @@ export default function ExamplesGallery() {
               marginBottom: '0.75rem',
             }}
           >
-            002 / Esempi
+            005 / Esempi
           </p>
           <h2
             style={{
@@ -79,7 +79,7 @@ export default function ExamplesGallery() {
             style={{
               fontFamily: 'var(--font-jetbrains)',
               fontSize: '0.65rem',
-              color: 'rgba(240,240,238,0.18)',
+              color: 'rgba(240,240,238,0.32)',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
             }}
@@ -151,7 +151,7 @@ export default function ExamplesGallery() {
                   style={{
                     fontFamily: 'var(--font-jetbrains)',
                     fontSize: 'var(--text-xs)',
-                    color: 'rgba(240,240,238,0.18)',
+                    color: 'rgba(240,240,238,0.32)',
                     letterSpacing: '0.08em',
                   }}
                 >

@@ -15,7 +15,7 @@ export const fontInter = Inter({
 
 export const fontMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-mono',
+  variable: '--font-jetbrains',
   display: 'swap',
   weight: ['400', '500'],
 })

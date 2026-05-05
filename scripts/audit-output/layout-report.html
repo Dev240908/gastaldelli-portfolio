@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Layout Audit Report</title>
+<style>
+  body { font-family: monospace; background: #0a0a0a; color: #f0f0ee; padding: 2rem; }
+  h1 { color: #bfff00; }
+  .issue { padding: 0.75rem 1rem; margin: 0.5rem 0; border-left: 3px solid #444; background: rgba(255,255,255,0.03); }
+  .CRITICAL { border-color: #ff4444; }
+  .HIGH { border-color: #ff8800; }
+  .MEDIUM { border-color: #ffcc00; }
+  .LOW { border-color: #666; }
+  .badge { display: inline-block; padding: 0.1rem 0.4rem; font-size: 0.75rem; border-radius: 3px; margin-right: 0.5rem; }
+  .CRITICAL .badge { background: #ff4444; color: #000; }
+  .HIGH .badge { background: #ff8800; color: #000; }
+  .MEDIUM .badge { background: #ffcc00; color: #000; }
+  .LOW .badge { background: #666; color: #fff; }
+  .summary { display: flex; gap: 1rem; margin: 1.5rem 0; }
+  .stat { padding: 1rem 1.5rem; border: 1px solid rgba(255,255,255,0.1); text-align: center; }
+  .stat .n { font-size: 2rem; font-weight: bold; color: #bfff00; }
+  pre { white-space: pre-wrap; word-break: break-all; }
+</style>
+</head>
+<body>
+<h1>Layout Audit — http://localhost:3040</h1>
+<p>05/05/2026, 17:57:32 — 0 issues found</p>
+<div class="summary">
+  <div class="stat"><div class="n">0</div>CRITICAL</div>
+  <div class="stat"><div class="n">0</div>HIGH</div>
+  <div class="stat"><div class="n">0</div>MEDIUM</div>
+  <div class="stat"><div class="n">0</div>LOW</div>
+</div>
+
+</body>
+</html>

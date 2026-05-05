@@ -1,14 +1,19 @@
 'use client'
+import { useRef, useEffect } from 'react'
 import { motion } from 'motion/react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface Service {
   num: string
   title: string
   description: string
   features: string[]
-  priceFrom: string
   highlight?: boolean
+  wide?: boolean
 }
 
 const services: Service[] = [
@@ -17,14 +22,12 @@ const services: Service[] = [
     title: 'Sito Vetrina',
     description: 'Per chi parte adesso o ha un sito che imbarazza. Online in 10 giorni.',
     features: ['5 pagine responsive', 'SEO tecnico base', 'Form contatto', 'Hosting primo mese'],
-    priceFrom: '990',
   },
   {
     num: '02',
     title: 'Sito Business PRO',
     description: 'Il pacchetto più scelto. Per attività che vogliono trovare clienti online davvero.',
     features: ['Fino a 10 pagine + blog', 'CMS per autonomia', 'Lighthouse 90+', 'Booking integrato', 'GMB ottimizzato', '1 mese supporto'],
-    priceFrom: '1.890',
     highlight: true,
   },
   {
@@ -32,34 +35,70 @@ const services: Service[] = [
     title: 'Sito Su Misura',
     description: 'E-commerce, automazioni, area clienti. Ogni soluzione è costruita per te.',
     features: ['E-commerce o custom', 'Automazioni integrate', 'Area riservata', 'Multilingua', '3 mesi supporto'],
-    priceFrom: '3.900',
   },
   {
     num: '04',
     title: 'Automazioni & Bot',
     description: 'Workflow N8N, bot WhatsApp/Telegram, integrazioni: meno lavoro manuale.',
     features: ['Workflow custom', 'Integrazioni multi-piattaforma', 'AI integrata', 'Monitoring incluso'],
-    priceFrom: '490',
   },
   {
     num: '05',
     title: 'SEO Locale',
     description: 'Apparire su Google quando i tuoi clienti ti cercano in zona.',
     features: ['Audit + keyword research', 'Google My Business', 'Articoli mensili', 'Report performance'],
-    priceFrom: '390/mese',
   },
   {
     num: '06',
     title: 'Consulenza',
     description: 'Una call per capire cosa serve davvero alla tua attività digitale.',
     features: ['Call strategica 1h', 'Audit sito esistente', 'Roadmap concreta', 'Senza obbligo di acquisto'],
-    priceFrom: '90',
+    wide: true,
   },
 ]
 
+const BENTO_CLASSES = [
+  'bento-card--c1r1',
+  'bento-card--c2r1',
+  'bento-card--c4r1',
+  'bento-card--c1r2',
+  'bento-card--c4r2',
+  'bento-card--wide',
+]
+
 export default function Services() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const featureRefs = useRef<(HTMLUListElement | null)[]>([])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      featureRefs.current.forEach((ul) => {
+        if (!ul) return
+        const items = ul.querySelectorAll('li')
+        gsap.fromTo(
+          items,
+          { opacity: 0, x: -12 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.45,
+            ease: 'power2.out',
+            stagger: 0.07,
+            scrollTrigger: {
+              trigger: ul,
+              start: 'top 88%',
+              once: true,
+            },
+          }
+        )
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
   return (
     <section
+      ref={sectionRef}
       id="servizi"
       style={{
         padding: 'var(--space-section) var(--space-container)',
@@ -83,14 +122,14 @@ export default function Services() {
             marginBottom: '0.75rem',
           }}
         >
-          001 / Servizi
+          003 / Servizi
         </p>
         <h2
           style={{
             fontFamily: 'var(--font-syne)',
             fontWeight: 800,
             fontSize: 'var(--text-display)',
-            lineHeight: 1,
+            lineHeight: 'var(--lh-display)',
             letterSpacing: '-0.03em',
             color: '#F0F0EE',
             marginBottom: '1.5rem',
@@ -109,18 +148,17 @@ export default function Services() {
             lineHeight: 1.6,
           }}
         >
-          Pacchetti pensati per attività locali e PMI. Prezzi trasparenti, tempi rapidi grazie agli AI tools, qualità senza compromessi.
+          Pacchetti pensati per attività locali e PMI. Tempi rapidi grazie agli AI tools, qualità senza compromessi.
         </p>
       </motion.div>
 
       <div
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))',
           gap: '1px',
           background: 'rgba(255,255,255,0.06)',
           border: '1px solid rgba(255,255,255,0.06)',
         }}
+        className="services-bento-grid"
       >
         {services.map((service, i) => (
           <motion.article
@@ -129,64 +167,63 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, delay: i * 0.06 }}
+            className={[
+              'service-card',
+              BENTO_CLASSES[i],
+              service.highlight ? 'service-card--featured' : '',
+            ].filter(Boolean).join(' ')}
             style={{
-              background: service.highlight ? 'rgba(191,255,0,0.03)' : '#080808',
-              padding: 'clamp(1.75rem,3vw,2.5rem)',
-              minHeight: 320,
+              background: service.highlight
+                ? 'rgba(191,255,0,0.04)'
+                : service.wide
+                ? 'rgba(255,255,255,0.015)'
+                : '#080808',
+              padding: service.highlight
+                ? 'clamp(2rem,3.5vw,3rem)'
+                : 'clamp(1.75rem,3vw,2.5rem)',
+              minHeight: service.highlight ? 400 : service.wide ? 160 : 300,
               display: 'flex',
-              flexDirection: 'column',
+              flexDirection: service.wide ? 'row' : 'column',
+              alignItems: service.wide ? 'center' : 'flex-start',
+              gap: service.wide ? 'clamp(2rem,4vw,4rem)' : undefined,
               position: 'relative',
-              borderTop: service.highlight ? '1px solid rgba(191,255,0,0.3)' : 'none',
+              borderTop: service.highlight
+                ? '1px solid rgba(191,255,0,0.35)'
+                : service.wide
+                ? '1px solid rgba(191,255,0,0.12)'
+                : 'none',
             }}
           >
             {service.highlight && (
-              <span
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  right: 'clamp(1.75rem,3vw,2.5rem)',
-                  transform: 'translateY(-50%)',
-                  background: '#BFFF00',
-                  color: '#080808',
-                  fontFamily: 'var(--font-jetbrains)',
-                  fontSize: '0.65rem',
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  padding: '0.3rem 0.7rem',
-                  fontWeight: 600,
-                }}
-              >
-                Più scelto
+              <span style={{
+                position: 'absolute',
+                top: 0,
+                right: 'clamp(1.75rem,3vw,2.5rem)',
+                transform: 'translateY(-50%)',
+                background: '#BFFF00',
+                color: '#080808',
+                fontFamily: 'var(--font-jetbrains)',
+                fontSize: '0.65rem',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                padding: '0.3rem 0.7rem',
+                fontWeight: 700,
+                boxShadow: '0 0 20px rgba(191,255,0,0.5)',
+              }}>
+                ★ Più scelto
               </span>
             )}
 
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                marginBottom: '1.5rem',
-              }}
-            >
+            <div style={{ marginBottom: '1.5rem' }}>
               <span
                 style={{
                   fontFamily: 'var(--font-jetbrains)',
                   fontSize: 'var(--text-xs)',
-                  color: 'rgba(240,240,238,0.18)',
+                  color: 'rgba(240,240,238,0.32)',
                   letterSpacing: '0.08em',
                 }}
               >
                 {service.num}
-              </span>
-              <span
-                style={{
-                  fontFamily: 'var(--font-jetbrains)',
-                  fontSize: 'var(--text-xs)',
-                  color: 'rgba(240,240,238,0.4)',
-                  letterSpacing: '0.05em',
-                }}
-              >
-                da €{service.priceFrom}
               </span>
             </div>
 
@@ -216,13 +253,15 @@ export default function Services() {
             </p>
 
             <ul
+              ref={el => { featureRefs.current[i] = el }}
               style={{
                 listStyle: 'none',
                 padding: 0,
-                margin: '0 0 auto 0',
+                margin: service.wide ? '0' : '0 0 auto 0',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.5rem',
+                flexWrap: service.wide ? 'wrap' : 'nowrap',
+                gap: service.wide ? '0.5rem 2rem' : '0.5rem',
               }}
             >
               {service.features.map((f) => (
@@ -249,6 +288,33 @@ export default function Services() {
                 </li>
               ))}
             </ul>
+
+            {service.wide && (
+              <Link
+                href="#contatti"
+                style={{
+                  fontFamily: 'var(--font-jetbrains)',
+                  fontSize: 'var(--text-sm)',
+                  background: '#BFFF00',
+                  color: '#080808',
+                  padding: '0.875rem 1.5rem',
+                  textDecoration: 'none',
+                  letterSpacing: '0.05em',
+                  fontWeight: 700,
+                  whiteSpace: 'nowrap',
+                  display: 'inline-block',
+                  transition: 'box-shadow 0.3s var(--ease-expo)',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 24px rgba(191,255,0,0.4)'
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none'
+                }}
+              >
+                Prenota call →
+              </Link>
+            )}
           </motion.article>
         ))}
       </div>
@@ -305,8 +371,16 @@ export default function Services() {
             padding: '0.875rem 1.5rem',
             textDecoration: 'none',
             letterSpacing: '0.05em',
-            fontWeight: 600,
+            fontWeight: 700,
             whiteSpace: 'nowrap',
+            display: 'inline-block',
+            transition: 'box-shadow 0.3s var(--ease-expo)',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 24px rgba(191,255,0,0.4)'
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none'
           }}
         >
           Prenota call →

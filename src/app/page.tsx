@@ -2,6 +2,8 @@
 import { motion } from 'motion/react'
 import { pageTransition } from '@/lib/motion'
 import Hero from '@/components/home/Hero'
+import Works from '@/components/home/Works'
+import Projects from '@/components/home/Projects'
 import Services from '@/components/home/Services'
 import About from '@/components/home/About'
 import ExamplesGallery from '@/components/home/ExamplesGallery'
@@ -16,6 +18,8 @@ export default function HomePage() {
       exit="exit"
     >
       <Hero />
+      <Works />
+      <Projects />
       <Services />
       <About />
       <ExamplesGallery />

@@ -27,7 +27,7 @@ export default function Contact() {
             marginBottom: '1.5rem',
           }}
         >
-          004 / Contatti
+          006 / Contatti
         </p>
 
         <h2
@@ -35,7 +35,7 @@ export default function Contact() {
             fontFamily: 'var(--font-syne)',
             fontWeight: 800,
             fontSize: 'var(--text-display)',
-            lineHeight: 1,
+            lineHeight: 'var(--lh-display)',
             letterSpacing: '-0.03em',
             color: '#F0F0EE',
             marginBottom: 'clamp(2rem,4vw,3.5rem)',
@@ -46,6 +46,29 @@ export default function Contact() {
             Parliamone.
           </span>
         </h2>
+
+        <a
+          href="tel:+393489515828"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            fontFamily: 'var(--font-jetbrains)',
+            fontSize: 'var(--text-xs)',
+            color: 'rgba(240,240,238,0.3)',
+            textDecoration: 'none',
+            letterSpacing: '0.1em',
+            marginBottom: 'clamp(1.5rem,3vw,2rem)',
+            transition: 'color 200ms',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#BFFF00')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(240,240,238,0.3)')}
+        >
+          +39 348 951 5828 ·&nbsp;
+          <span style={{ color: 'rgba(191,255,0,0.5)' }}>Verona, Italia</span>
+        </a>
+
+        <br />
 
         <a
           href="mailto:brian@gastaldelli.it"
@@ -100,17 +123,17 @@ export default function Contact() {
           style={{
             fontFamily: 'var(--font-jetbrains)',
             fontSize: 'var(--text-xs)',
-            color: 'rgba(240,240,238,0.18)',
+            color: 'rgba(240,240,238,0.4)',
             letterSpacing: '0.06em',
           }}
         >
-          © 2025 Brian Gastaldelli
+          © 2026 Brian Gastaldelli
         </p>
         <p
           style={{
             fontFamily: 'var(--font-jetbrains)',
             fontSize: 'var(--text-xs)',
-            color: 'rgba(240,240,238,0.18)',
+            color: 'rgba(240,240,238,0.4)',
             letterSpacing: '0.06em',
           }}
         >
