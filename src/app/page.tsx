@@ -2,13 +2,13 @@
 import { motion } from 'motion/react'
 import { pageTransition } from '@/lib/motion'
 import Hero from '@/components/home/Hero'
+import Problema from '@/components/home/Problema'
+import Metodo from '@/components/home/Metodo'
 import Works from '@/components/home/Works'
-import Projects from '@/components/home/Projects'
+import Testimonianze from '@/components/home/Testimonianze'
 import Services from '@/components/home/Services'
-import About from '@/components/home/About'
-import ExamplesGallery from '@/components/home/ExamplesGallery'
+import Faq from '@/components/home/Faq'
 import Contact from '@/components/home/Contact'
-import WaveDivider from '@/components/ui/WaveDivider'
 
 export default function HomePage() {
   return (
@@ -19,12 +19,12 @@ export default function HomePage() {
       exit="exit"
     >
       <Hero />
-      <WaveDivider fill="#DA9100" bgFill="#F5F0E1" />
+      <Problema />
+      <Metodo />
       <Works />
-      <Projects />
+      <Testimonianze />
       <Services />
-      <About />
-      <ExamplesGallery />
+      <Faq />
       <Contact />
     </motion.main>
   )

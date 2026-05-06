@@ -3,6 +3,7 @@ import { useRef, useEffect } from 'react'
 import { motion } from 'motion/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,6 +15,8 @@ interface Project {
   tech: string[]
   url?: string
   year: string
+  slug: string
+  preview: string
 }
 
 interface Stage {
@@ -28,35 +31,43 @@ const projects: Project[] = [
     num: '01',
     name: 'AI Assistant System',
     type: 'AI · Automazione',
-    desc: 'Sistema operativo AI personale su Telegram: 5 assistenti specializzati che gestiscono autonomamente clienti, contenuti, codice e operazioni. Memoria persistente tra sessioni, cron job 24/7 e orchestrazione intelligente — zero intervento manuale per le routine.',
-    tech: ['TypeScript', 'Claude SDK', 'Node.js', 'PM2', 'metabot'],
+    desc: 'Sistema operativo AI personale su Telegram: 5 assistenti specializzati che gestiscono autonomamente clienti, contenuti, codice e operazioni. Memoria persistente tra sessioni, cron job 24/7 e orchestrazione intelligente.',
+    tech: ['TypeScript', 'Claude SDK', 'Node.js', 'PM2'],
     year: '2025–oggi',
+    slug: 'sistema-ai',
+    preview: 'linear-gradient(135deg, #574634 0%, #DA9100 50%, #B7410E 100%)',
   },
   {
     num: '02',
     name: 'gastaldelli.it',
     type: 'Web · Creative Dev',
-    desc: 'Portfolio personale con web experience 3D, shader WebGL personalizzati, animazioni avanzate GSAP e ScrollTrigger. Cursor magnetico, page transitions fluide, sistema di componenti modulare. Deploy su Cloudflare Pages con CI automatico.',
-    tech: ['Next.js 15', 'Three.js', 'GSAP', 'TypeScript', 'Cloudflare'],
+    desc: 'Portfolio personale con web experience premium, animazioni avanzate GSAP e ScrollTrigger. Cursor magnetico, page transitions fluide, SplitText animations, concentric circles geometriche.',
+    tech: ['Next.js 15', 'GSAP', 'TypeScript', 'Vercel'],
     url: 'https://gastaldelli.it',
     year: '2025',
+    slug: 'portfolio-dev',
+    preview: 'linear-gradient(135deg, #F5F0E1 0%, #FAE679 40%, #DA9100 100%)',
   },
   {
     num: '03',
     name: 'TutelaDoc',
     type: 'SaaS · B2B',
-    desc: 'Piattaforma web per la generazione automatizzata di Piani Operativi Sicurezza (POS) nel settore edilizia. Interfaccia guidata che riduce da giorni a minuti la compilazione di documentazione obbligatoria per cantieri.',
+    desc: 'Piattaforma web per la generazione automatizzata di Piani Operativi Sicurezza (POS) nel settore edilizia. Riduce da giorni a minuti la compilazione di documentazione obbligatoria per cantieri.',
     tech: ['Next.js', 'Node.js', 'PostgreSQL', 'TypeScript'],
     url: 'https://tuteladoc.it',
     year: '2025',
+    slug: 'tuteladoc',
+    preview: 'linear-gradient(135deg, #568203 0%, #FAE679 100%)',
   },
   {
     num: '04',
     name: 'Lead Gen Pipeline',
     type: 'Automazione · CLI',
-    desc: 'Pipeline Python per outreach automatico verso PMI italiane. Ricerca prospect, generazione email personalizzate via LLM in base al settore e al sito dell\'azienda, tracking risposte e gestione follow-up automatizzati.',
+    desc: 'Pipeline Python per outreach automatico verso PMI italiane. Ricerca prospect, generazione email personalizzate via LLM in base al settore e al sito dell\'azienda, tracking risposte e follow-up.',
     tech: ['Python', 'uv', 'Claude API', 'Hunter.io', 'SMTP'],
     year: '2025',
+    slug: 'lead-gen',
+    preview: 'linear-gradient(135deg, #B7410E 0%, #E45356 50%, #FAE679 100%)',
   },
 ]
 
@@ -210,6 +221,12 @@ export default function Works() {
             aria-label={`Progetto: ${p.name}`}
             ref={el => { if (el) cardRefs.current[i] = el }}
             className="works-card"
+            onMouseEnter={() => {
+              document.dispatchEvent(new CustomEvent('imageFollower:show', { detail: { bg: p.preview } }))
+            }}
+            onMouseLeave={() => {
+              document.dispatchEvent(new CustomEvent('imageFollower:hide'))
+            }}
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -287,6 +304,21 @@ export default function Works() {
                     {p.url.replace('https://', '')} ↗
                   </a>
                 )}
+                <Link
+                  href={`/works/${p.slug}`}
+                  style={{
+                    fontFamily: 'var(--font-caprasimo)',
+                    fontSize: '0.65rem',
+                    color: '#B7410E',
+                    textDecoration: 'none',
+                    letterSpacing: '0.06em',
+                    transition: 'opacity 200ms',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = '0.65')}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                >
+                  Case study →
+                </Link>
               </div>
             </div>
 

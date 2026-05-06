@@ -1,24 +1,18 @@
 'use client'
 
 const ITEMS = [
-  'Web Development',
-  'Automazioni AI',
-  'N8N Workflow',
-  'Next.js 15',
-  'Claude SDK',
-  'Three.js',
-  'Lead Generation',
-  'Cross Media Design',
-  'GSAP',
-  'Telegram Bot',
-  'LLM Agents',
-  'Verona',
-  'TypeScript',
+  '12+ clienti PMI',
+  'Siti in 10–15 giorni',
   'SEO Locale',
+  'Google Business',
+  'Verona · Nord Italia',
+  'Web · Automazioni AI',
+  '3 anni di attività',
+  'Nessun subappalto',
   'Google Ads',
-  'UI/UX Design',
-  'PMI Italia',
-  'Freelance',
+  'Rispondo entro 24h',
+  'Preventivo gratuito',
+  'Next.js · TypeScript',
 ]
 
 function Strip({ reverse = false }: { reverse?: boolean }) {

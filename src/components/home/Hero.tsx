@@ -1,46 +1,57 @@
 'use client'
-/* Decision: rimosso HeroGLCanvas — shader WebGL scuro incompatibile con warm cream.
-   Sostituito con CSS blob-morphing + motivo geometrico per estetica groovy anni '70. */
 import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 import MarqueeStrip from './MarqueeStrip'
+
+gsap.registerPlugin(SplitText)
 
 export default function Hero() {
   const containerRef  = useRef<HTMLElement>(null)
-  const line1Ref      = useRef<HTMLSpanElement>(null)
-  const line2Ref      = useRef<HTMLSpanElement>(null)
-  const line3Ref      = useRef<HTMLSpanElement>(null)
+  const h1Ref         = useRef<HTMLHeadingElement>(null)
   const subRef        = useRef<HTMLParagraphElement>(null)
   const ctaRef        = useRef<HTMLDivElement>(null)
-  const scrollRef     = useRef<HTMLDivElement>(null)
   const marqueeRef    = useRef<HTMLDivElement>(null)
+  const scrollRef     = useRef<HTMLDivElement>(null)
   const primaryBtnRef = useRef<HTMLAnchorElement>(null)
 
-  /* Entrance animation — stagger page load */
   useEffect(() => {
+    const h1 = h1Ref.current
+    if (!h1) return
+
+    const split = new SplitText(h1, { type: 'chars', mask: true })
+    const delay = sessionStorage.getItem('loaded') ? 0.1 : 1.85
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
-      tl.from([line1Ref.current, line2Ref.current, line3Ref.current], {
-          yPercent: 110, duration: 1.1, stagger: 0.09, delay: 0.25,
+      tl.from(split.chars, {
+          yPercent: 110,
+          stagger: 0.018,
+          duration: 0.8,
+          delay,
         })
-        .from(subRef.current,     { opacity: 0, y: 16, duration: 0.7 }, '-=0.4')
-        .from(ctaRef.current,     { opacity: 0, y: 16, duration: 0.6 }, '-=0.35')
-        .from(marqueeRef.current, { opacity: 0, duration: 0.8 },         '-=0.2')
-        .from(scrollRef.current,  { opacity: 0, duration: 0.6 },         '-=0.4')
+        .from(subRef.current,     { opacity: 0, y: 18, duration: 0.7 }, '-=0.35')
+        .from(ctaRef.current,     { opacity: 0, y: 18, duration: 0.6 }, '-=0.3')
+        .from(scrollRef.current,  { opacity: 0, duration: 0.6 },         '-=0.3')
+        .from(marqueeRef.current, { opacity: 0, duration: 0.8 },         '-=0.5')
     }, containerRef)
-    return () => ctx.revert()
+
+    return () => {
+      split.revert()
+      ctx.revert()
+    }
   }, [])
 
   /* Magnetic CTA */
   useEffect(() => {
     const btn = primaryBtnRef.current
     if (!btn) return
-    const strength = 0.4
+    const strength = 0.38
     let rect = btn.getBoundingClientRect()
     const onEnter = () => { rect = btn.getBoundingClientRect() }
-    const onMove = (e: MouseEvent) => {
+    const onMove  = (e: MouseEvent) => {
       const cx = rect.left + rect.width / 2
-      const cy = rect.top + rect.height / 2
+      const cy = rect.top  + rect.height / 2
       const dx = e.clientX - cx
       const dy = e.clientY - cy
       if (Math.hypot(dx, dy) > Math.max(rect.width, rect.height) * 1.2) return
@@ -60,6 +71,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
+      id="hero"
       style={{
         position: 'relative',
         minHeight: '100svh',
@@ -69,60 +81,30 @@ export default function Hero() {
         overflow: 'hidden',
       }}
     >
-      {/* ——— Blob decorativi CSS ——— */}
-
-      {/* Blob 1 — harvest gold, top-right, grande */}
+      {/* Concentric circles — geometric background */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
-          top: '-10%',
-          right: '-8%',
-          width: 'clamp(320px, 42vw, 650px)',
-          height: 'clamp(320px, 42vw, 650px)',
-          background: 'radial-gradient(circle at 40% 40%, #FAE679 0%, #DA9100 60%, transparent 80%)',
-          opacity: 0.28,
-          animation: 'blob-morph 16s ease-in-out infinite',
-          zIndex: 0,
+          top: '50%',
+          right: '-12%',
+          width: 'clamp(380px, 68vw, 860px)',
+          height: 'clamp(380px, 68vw, 860px)',
+          transform: 'translateY(-50%)',
+          backgroundImage: `repeating-radial-gradient(
+            circle at center,
+            transparent 0px,
+            transparent 36px,
+            rgba(87,70,52,0.07) 36px,
+            rgba(87,70,52,0.07) 37px
+          )`,
+          animation: 'geo-breathe 9s ease-in-out infinite',
           pointerEvents: 'none',
+          zIndex: 0,
         }}
       />
 
-      {/* Blob 2 — rust orange, bottom-left, piccolo */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          bottom: '8%',
-          left: '-6%',
-          width: 'clamp(180px, 22vw, 380px)',
-          height: 'clamp(180px, 22vw, 380px)',
-          background: 'radial-gradient(circle at 60% 60%, #E45356 0%, #B7410E 55%, transparent 80%)',
-          opacity: 0.18,
-          animation: 'blob-morph-slow 20s ease-in-out infinite reverse',
-          zIndex: 0,
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* Blob 3 — avocado, centro sinistra, accento */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: '35%',
-          left: '2%',
-          width: 'clamp(100px, 12vw, 200px)',
-          height: 'clamp(100px, 12vw, 200px)',
-          background: 'var(--avocado)',
-          opacity: 0.12,
-          animation: 'blob-morph 22s ease-in-out infinite 4s',
-          zIndex: 0,
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* ——— Badge "Disponibile" — top left ——— */}
+      {/* Corner badges */}
       <div
         style={{
           position: 'absolute',
@@ -146,7 +128,6 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* ——— Numero sezione — top right ——— */}
       <div
         style={{
           position: 'absolute',
@@ -162,10 +143,10 @@ export default function Hero() {
         001 / HERO
       </div>
 
-      {/* ——— Spacer — mantiene il titolo sotto la nav ——— */}
+      {/* Nav spacer */}
       <div aria-hidden="true" style={{ flex: '1 1 0', minHeight: 'clamp(5rem, 10vh, 7rem)' }} />
 
-      {/* ——— Contenuto principale ——— */}
+      {/* Main content */}
       <div
         style={{
           position: 'relative',
@@ -173,79 +154,76 @@ export default function Hero() {
           padding: '0 var(--space-container)',
         }}
       >
-        {/* Headline — Abril Fatface, salto dimensionale estremo */}
+        {/* Outcome headline */}
         <h1
-          aria-label="Il digitale che lavora per te."
+          ref={h1Ref}
           style={{
             fontFamily: 'var(--font-abril)',
             fontWeight: 400,
-            fontSize: 'clamp(3.5rem, 8vw, 7rem)',
-            lineHeight: 1.0,
+            fontSize: 'clamp(3rem, 7.5vw, 6.5rem)',
+            lineHeight: 1.02,
             letterSpacing: '-0.01em',
             color: '#574634',
-            marginBottom: 'clamp(1.5rem, 3vh, 2.5rem)',
+            marginBottom: 'clamp(1.75rem, 3.5vh, 2.75rem)',
+            maxWidth: '14ch',
           }}
         >
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.05em' }}>
-            <span ref={line1Ref} style={{ display: 'block' }}>
-              Il&nbsp;digitale
-            </span>
-          </span>
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.05em' }}>
-            <span ref={line2Ref} style={{ display: 'block' }}>
-              che&nbsp;
-              {/* "lavora" in harvest gold — accentuazione calda */}
-              <span style={{ color: '#DA9100' }}>lavora</span>
-            </span>
-          </span>
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.08em' }}>
-            <span ref={line3Ref} style={{ display: 'block' }}>
-              per&nbsp;te.
-            </span>
-          </span>
+          Faccio trovare le PMI italiane dove i clienti le cercano.
         </h1>
 
-        {/* Sottotitolo — Playfair Display italic, tono caldo */}
+        {/* Subtitle */}
         <p
           ref={subRef}
           style={{
-            fontFamily: 'var(--font-playfair)',
+            fontFamily: 'var(--font-fraunces)',
             fontStyle: 'italic',
             fontWeight: 400,
-            fontSize: 'clamp(1rem, 1.8vw, 1.375rem)',
-            color: 'rgba(87, 70, 52, 0.65)',
-            maxWidth: 480,
-            lineHeight: 1.55,
+            fontSize: 'clamp(1rem, 1.6vw, 1.25rem)',
+            color: 'rgba(87, 70, 52, 0.6)',
+            maxWidth: 440,
+            lineHeight: 1.65,
             marginBottom: 'clamp(2rem, 4vh, 3rem)',
           }}
         >
-          Brian Gastaldelli · Siti web, automazioni AI<br />
-          e sistemi digitali per PMI. Basato a Verona.
+          Brian Gastaldelli · Web, SEO e automazioni AI<br />
+          per attività locali. Verona · Nord Italia.
         </p>
 
         {/* CTA row */}
         <div
           ref={ctaRef}
-          style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}
+          style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'flex-start' }}
         >
-          {/* Primary CTA — groovy red, offset shadow */}
-          <a
-            ref={primaryBtnRef}
-            href="#lavori"
-            className="btn-groovy"
-            style={{ willChange: 'transform' }}
-          >
-            Vedi i lavori
-            <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>↓</span>
-          </a>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <a
+              ref={primaryBtnRef}
+              href="#contatti"
+              className="btn-groovy"
+              style={{ willChange: 'transform' }}
+            >
+              Prenota una call gratuita di 20&nbsp;min
+              <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>→</span>
+            </a>
 
-          {/* Ghost CTA */}
-          <a href="mailto:brian@gastaldelli.it" className="btn-ghost">
-            Scrivimi
-          </a>
+            <a href="#lavori" className="btn-ghost">
+              Vedi i lavori
+            </a>
+          </div>
+
+          <p
+            style={{
+              fontFamily: 'var(--font-caprasimo)',
+              fontSize: '0.65rem',
+              color: 'rgba(87, 70, 52, 0.38)',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}
+          >
+            Rispondo entro 24h · Nessun obbligo
+          </p>
         </div>
 
-        {/* Marquee strip */}
+        {/* MarqueeStrip */}
         <div ref={marqueeRef} style={{ marginTop: 'clamp(3rem, 6vh, 5rem)' }}>
           <MarqueeStrip />
         </div>

@@ -38,14 +38,28 @@ export default function Contact() {
             lineHeight: 'var(--lh-display)',
             letterSpacing: '-0.01em',
             color: '#574634',
-            marginBottom: 'clamp(2rem,4vw,3.5rem)',
+            marginBottom: 'clamp(1.5rem,3vw,2.5rem)',
           }}
         >
-          Hai un progetto?<br />
+          Prenota una call<br />
           <span style={{ color: 'rgba(87, 70, 52, 0.3)' }}>
-            Parliamone.
+            gratuita di 20 min.
           </span>
         </h2>
+
+        <p
+          style={{
+            fontFamily: 'var(--font-fraunces)',
+            fontStyle: 'italic',
+            fontSize: 'var(--text-sm)',
+            color: 'rgba(87,70,52,0.5)',
+            lineHeight: 1.7,
+            marginBottom: 'clamp(2rem,4vw,3rem)',
+            maxWidth: 400,
+          }}
+        >
+          Parliamo della tua attività. Capiamo insieme cosa serve. Nessun obbligo, nessuna vendita aggressiva — solo una conversazione utile.
+        </p>
 
         <a
           href="tel:+393489515828"

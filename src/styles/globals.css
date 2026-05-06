@@ -442,3 +442,47 @@ body::before {
   .service-card--featured { animation: none; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* ============================================
+   GEO-BREATHE — concentric circles hero bg
+   ============================================ */
+@keyframes geo-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.055; }
+  50%       { transform: scale(1.05); opacity: 0.09; }
+}
+
+/* ============================================
+   PROBLEMA — pain-point section
+   ============================================ */
+.problema-item {
+  border-bottom: 1px solid rgba(87,70,52,0.12);
+  transition: background 300ms;
+}
+.problema-item:hover {
+  background: rgba(218,145,0,0.04);
+}
+
+/* ============================================
+   FAQ ACCORDION
+   ============================================ */
+.faq-item {
+  border-bottom: 1px solid rgba(87,70,52,0.15);
+  overflow: hidden;
+}
+.faq-answer {
+  overflow: hidden;
+  transition: max-height 450ms cubic-bezier(0.16,1,0.3,1), opacity 350ms ease;
+}
+
+/* ============================================
+   TESTIMONIANZE
+   ============================================ */
+.testimonial-card {
+  background: var(--warm-cream);
+  border: 2px solid rgba(87,70,52,0.12);
+  transition: border-color 300ms, transform 300ms var(--ease-expo);
+}
+.testimonial-card:hover {
+  border-color: rgba(218,145,0,0.35);
+  transform: translateY(-4px);
+}
