@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { fontSyne, fontInter, fontMono } from '@/lib/fonts'
+import { fontAbril, fontPlayfair, fontFraunces, fontCaprasimo } from '@/lib/fonts'
 import Nav from '@/components/shell/Nav'
 import PageWrapper from '@/components/shell/PageWrapper'
 import SmoothScroll from '@/components/shell/SmoothScroll'
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: '%s — Brian Gastaldelli',
   },
   description: 'Realizzo siti web, automazioni e sistemi digitali per attività locali e PMI del Nord Italia. Basato a Verona, consegno in 10-15 giorni.',
-  keywords: ['sito web Verona', 'web designer Verona', 'automazioni PMI Italia', 'freelance web Verona', 'sito web per ristorante', 'sito web per hotel'],
+  keywords: ['sito web Verona', 'web designer Verona', 'automazioni PMI Italia', 'freelance web Verona'],
   authors: [{ name: 'Brian Gastaldelli', url: 'https://gastaldelli.it' }],
   robots: { index: true, follow: true },
   openGraph: {
@@ -28,7 +28,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="it" className={`${fontSyne.variable} ${fontInter.variable} ${fontMono.variable}`}>
+    <html
+      lang="it"
+      className={`${fontAbril.variable} ${fontPlayfair.variable} ${fontFraunces.variable} ${fontCaprasimo.variable}`}
+    >
       <body>
         <CustomCursor />
         <SmoothScroll />

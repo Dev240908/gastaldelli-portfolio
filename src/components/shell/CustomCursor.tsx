@@ -5,7 +5,6 @@ export default function CustomCursor() {
   const dotRef  = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
 
-  // click ripple factory
   const spawnRipple = useCallback((x: number, y: number) => {
     const r = document.createElement('div')
     r.style.cssText = [
@@ -15,9 +14,9 @@ export default function CustomCursor() {
       'width:6px',
       'height:6px',
       'border-radius:50%',
-      'border:1.5px solid #BFFF00',
+      'border:1.5px solid #DA9100',
       'transform:translate(-50%,-50%) scale(1)',
-      'opacity:0.8',
+      'opacity:0.7',
       'pointer-events:none',
       'z-index:99998',
       'transition:transform 600ms cubic-bezier(0.16,1,0.3,1), opacity 600ms ease',
@@ -40,20 +39,19 @@ export default function CustomCursor() {
     let raf: number
 
     const onMove = (e: MouseEvent) => { mx = e.clientX; my = e.clientY }
-
     const onClick = (e: MouseEvent) => spawnRipple(e.clientX, e.clientY)
 
     const onEnterLink = () => {
       ring.style.transform   = 'translate(-50%,-50%) scale(2.4)'
-      ring.style.borderColor = '#BFFF00'
+      ring.style.borderColor = '#B7410E'
       ring.style.mixBlendMode = 'normal'
       dot.style.opacity = '0'
     }
 
     const onLeaveLink = () => {
       ring.style.transform    = 'translate(-50%,-50%) scale(1)'
-      ring.style.borderColor  = 'rgba(240,240,238,0.5)'
-      ring.style.mixBlendMode = 'difference'
+      ring.style.borderColor  = 'rgba(87, 70, 52, 0.4)'
+      ring.style.mixBlendMode = 'normal'
       dot.style.opacity = '1'
     }
 
@@ -67,7 +65,6 @@ export default function CustomCursor() {
       raf = requestAnimationFrame(tick)
     }
 
-    // use event delegation — works for dynamically mounted links too
     const delegate = (e: MouseEvent) => {
       const target = (e.target as Element).closest('a, button, [role="button"]')
       if (target) {
@@ -103,7 +100,7 @@ export default function CustomCursor() {
           left: 0,
           width: 6,
           height: 6,
-          background: '#BFFF00',
+          background: '#DA9100',
           borderRadius: '50%',
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',
@@ -121,12 +118,11 @@ export default function CustomCursor() {
           left: 0,
           width: 36,
           height: 36,
-          border: '1px solid rgba(240,240,238,0.5)',
+          border: '1.5px solid rgba(87, 70, 52, 0.4)',
           borderRadius: '50%',
           transform: 'translate(-50%, -50%) scale(1)',
           pointerEvents: 'none',
           zIndex: 99999,
-          mixBlendMode: 'difference',
           transition: 'transform 300ms cubic-bezier(0.16,1,0.3,1), border-color 300ms',
         }}
       />

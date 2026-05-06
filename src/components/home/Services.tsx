@@ -102,7 +102,7 @@ export default function Services() {
       id="servizi"
       style={{
         padding: 'var(--space-section) var(--space-container)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '2px solid rgba(87, 70, 52, 0.15)',
       }}
     >
       <motion.div
@@ -114,9 +114,9 @@ export default function Services() {
       >
         <p
           style={{
-            fontFamily: 'var(--font-jetbrains)',
-            fontSize: 'var(--text-xs)',
-            color: '#BFFF00',
+            fontFamily: 'var(--font-caprasimo)',
+            fontSize: '0.7rem',
+            color: '#DA9100',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             marginBottom: '0.75rem',
@@ -126,25 +126,26 @@ export default function Services() {
         </p>
         <h2
           style={{
-            fontFamily: 'var(--font-syne)',
-            fontWeight: 800,
+            fontFamily: 'var(--font-abril)',
+            fontWeight: 400,
             fontSize: 'var(--text-display)',
             lineHeight: 'var(--lh-display)',
-            letterSpacing: '-0.03em',
-            color: '#F0F0EE',
+            letterSpacing: '-0.01em',
+            color: '#574634',
             marginBottom: '1.5rem',
           }}
         >
           Cosa posso fare<br />
-          <span style={{ WebkitTextStroke: '1.5px rgba(240,240,238,0.25)', color: 'transparent' }}>
+          <span style={{ color: '#DA9100' }}>
             per la tua attività.
           </span>
         </h2>
         <p
           style={{
-            fontFamily: 'var(--font-inter)',
+            fontFamily: 'var(--font-fraunces)',
+            fontStyle: 'italic',
             fontSize: 'var(--text-base)',
-            color: 'rgba(240,240,238,0.55)',
+            color: 'rgba(87, 70, 52, 0.6)',
             lineHeight: 1.6,
           }}
         >
@@ -155,8 +156,8 @@ export default function Services() {
       <div
         style={{
           gap: '1px',
-          background: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          background: 'rgba(87, 70, 52, 0.15)',
+          border: '2px solid rgba(87, 70, 52, 0.2)',
         }}
         className="services-bento-grid"
       >
@@ -174,10 +175,10 @@ export default function Services() {
             ].filter(Boolean).join(' ')}
             style={{
               background: service.highlight
-                ? 'rgba(191,255,0,0.04)'
+                ? 'rgba(218, 145, 0, 0.06)'
                 : service.wide
-                ? 'rgba(255,255,255,0.015)'
-                : '#080808',
+                ? 'rgba(218, 145, 0, 0.03)'
+                : '#F5F0E1',
               padding: service.highlight
                 ? 'clamp(2rem,3.5vw,3rem)'
                 : 'clamp(1.75rem,3vw,2.5rem)',
@@ -188,9 +189,9 @@ export default function Services() {
               gap: service.wide ? 'clamp(2rem,4vw,4rem)' : undefined,
               position: 'relative',
               borderTop: service.highlight
-                ? '1px solid rgba(191,255,0,0.35)'
+                ? '2px solid rgba(218, 145, 0, 0.5)'
                 : service.wide
-                ? '1px solid rgba(191,255,0,0.12)'
+                ? '2px solid rgba(218, 145, 0, 0.2)'
                 : 'none',
             }}
           >
@@ -200,15 +201,15 @@ export default function Services() {
                 top: 0,
                 right: 'clamp(1.75rem,3vw,2.5rem)',
                 transform: 'translateY(-50%)',
-                background: '#BFFF00',
-                color: '#080808',
-                fontFamily: 'var(--font-jetbrains)',
+                background: '#DA9100',
+                color: '#F5F0E1',
+                fontFamily: 'var(--font-caprasimo)',
                 fontSize: '0.65rem',
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 padding: '0.3rem 0.7rem',
-                fontWeight: 700,
-                boxShadow: '0 0 20px rgba(191,255,0,0.5)',
+                border: '2px solid #574634',
+                boxShadow: '3px 3px 0 0 #574634',
               }}>
                 ★ Più scelto
               </span>
@@ -217,9 +218,9 @@ export default function Services() {
             <div style={{ marginBottom: '1.5rem' }}>
               <span
                 style={{
-                  fontFamily: 'var(--font-jetbrains)',
-                  fontSize: 'var(--text-xs)',
-                  color: 'rgba(240,240,238,0.32)',
+                  fontFamily: 'var(--font-caprasimo)',
+                  fontSize: '0.7rem',
+                  color: 'rgba(87, 70, 52, 0.32)',
                   letterSpacing: '0.08em',
                 }}
               >
@@ -229,11 +230,11 @@ export default function Services() {
 
             <h3
               style={{
-                fontFamily: 'var(--font-syne)',
-                fontWeight: 700,
+                fontFamily: 'var(--font-abril)',
+                fontWeight: 400,
                 fontSize: 'clamp(1.25rem,2.2vw,1.5rem)',
-                letterSpacing: '-0.02em',
-                color: '#F0F0EE',
+                letterSpacing: '-0.01em',
+                color: '#574634',
                 marginBottom: '0.75rem',
                 lineHeight: 1.15,
               }}
@@ -242,9 +243,9 @@ export default function Services() {
             </h3>
             <p
               style={{
-                fontFamily: 'var(--font-inter)',
+                fontFamily: 'var(--font-fraunces)',
                 fontSize: 'var(--text-sm)',
-                color: 'rgba(240,240,238,0.5)',
+                color: 'rgba(87, 70, 52, 0.6)',
                 lineHeight: 1.6,
                 marginBottom: '1.5rem',
               }}
@@ -268,9 +269,9 @@ export default function Services() {
                 <li
                   key={f}
                   style={{
-                    fontFamily: 'var(--font-inter)',
+                    fontFamily: 'var(--font-fraunces)',
                     fontSize: 'var(--text-sm)',
-                    color: 'rgba(240,240,238,0.7)',
+                    color: 'rgba(87, 70, 52, 0.75)',
                     paddingLeft: '1.25rem',
                     position: 'relative',
                   }}
@@ -279,7 +280,8 @@ export default function Services() {
                     style={{
                       position: 'absolute',
                       left: 0,
-                      color: '#BFFF00',
+                      color: '#DA9100',
+                      fontWeight: 700,
                     }}
                   >
                     ›
@@ -292,25 +294,8 @@ export default function Services() {
             {service.wide && (
               <Link
                 href="#contatti"
-                style={{
-                  fontFamily: 'var(--font-jetbrains)',
-                  fontSize: 'var(--text-sm)',
-                  background: '#BFFF00',
-                  color: '#080808',
-                  padding: '0.875rem 1.5rem',
-                  textDecoration: 'none',
-                  letterSpacing: '0.05em',
-                  fontWeight: 700,
-                  whiteSpace: 'nowrap',
-                  display: 'inline-block',
-                  transition: 'box-shadow 0.3s var(--ease-expo)',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 24px rgba(191,255,0,0.4)'
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none'
-                }}
+                className="btn-groovy"
+                style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
               >
                 Prenota call →
               </Link>
@@ -327,8 +312,8 @@ export default function Services() {
         style={{
           marginTop: '3rem',
           padding: 'clamp(1.5rem,3vw,2.5rem)',
-          border: '1px solid rgba(191,255,0,0.2)',
-          background: 'rgba(191,255,0,0.02)',
+          border: '2px solid rgba(218, 145, 0, 0.3)',
+          background: 'rgba(218, 145, 0, 0.04)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -339,20 +324,22 @@ export default function Services() {
         <div>
           <p
             style={{
-              fontFamily: 'var(--font-syne)',
-              fontWeight: 600,
+              fontFamily: 'var(--font-abril)',
+              fontWeight: 400,
               fontSize: 'clamp(1rem,2vw,1.25rem)',
-              color: '#F0F0EE',
+              color: '#574634',
               marginBottom: '0.5rem',
+              letterSpacing: '-0.01em',
             }}
           >
             Non sai quale pacchetto fa per te?
           </p>
           <p
             style={{
-              fontFamily: 'var(--font-inter)',
+              fontFamily: 'var(--font-fraunces)',
+              fontStyle: 'italic',
               fontSize: 'var(--text-sm)',
-              color: 'rgba(240,240,238,0.5)',
+              color: 'rgba(87, 70, 52, 0.6)',
               maxWidth: 500,
               lineHeight: 1.6,
             }}
@@ -363,25 +350,8 @@ export default function Services() {
         </div>
         <Link
           href="#contatti"
-          style={{
-            fontFamily: 'var(--font-jetbrains)',
-            fontSize: 'var(--text-sm)',
-            background: '#BFFF00',
-            color: '#080808',
-            padding: '0.875rem 1.5rem',
-            textDecoration: 'none',
-            letterSpacing: '0.05em',
-            fontWeight: 700,
-            whiteSpace: 'nowrap',
-            display: 'inline-block',
-            transition: 'box-shadow 0.3s var(--ease-expo)',
-          }}
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 24px rgba(191,255,0,0.4)'
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none'
-          }}
+          className="btn-ghost"
+          style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
         >
           Prenota call →
         </Link>

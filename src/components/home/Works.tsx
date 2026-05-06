@@ -96,7 +96,6 @@ export default function Works() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Clip-reveal titoli delle project card
       titleRefs.current.forEach((title, i) => {
         gsap.fromTo(
           title,
@@ -114,7 +113,6 @@ export default function Works() {
         )
       })
 
-      // Tech tags stagger
       techRefs.current.forEach((container, i) => {
         const tags = container.querySelectorAll('span')
         gsap.fromTo(
@@ -135,7 +133,6 @@ export default function Works() {
         )
       })
 
-      // Stage items stagger
       stageRefs.current.forEach((el, i) => {
         gsap.fromTo(
           el,
@@ -165,7 +162,7 @@ export default function Works() {
       id="lavori"
       style={{
         padding: 'var(--space-section) var(--space-container)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '2px solid rgba(87, 70, 52, 0.15)',
       }}
     >
       {/* Section header */}
@@ -178,9 +175,9 @@ export default function Works() {
       >
         <p
           style={{
-            fontFamily: 'var(--font-jetbrains)',
-            fontSize: 'var(--text-xs)',
-            color: '#BFFF00',
+            fontFamily: 'var(--font-caprasimo)',
+            fontSize: '0.7rem',
+            color: '#DA9100',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             marginBottom: '0.75rem',
@@ -190,22 +187,22 @@ export default function Works() {
         </p>
         <h2
           style={{
-            fontFamily: 'var(--font-syne)',
-            fontWeight: 800,
+            fontFamily: 'var(--font-abril)',
+            fontWeight: 400,
             fontSize: 'var(--text-display)',
             lineHeight: 'var(--lh-display)',
-            letterSpacing: '-0.03em',
-            color: '#F0F0EE',
+            letterSpacing: '-0.01em',
+            color: '#574634',
           }}
         >
           Progetti recenti.<br />
-          <span style={{ WebkitTextStroke: '1.5px rgba(240,240,238,0.2)', color: 'transparent' }}>
+          <span style={{ color: '#DA9100' }}>
             Risultati concreti.
           </span>
         </h2>
       </motion.div>
 
-      {/* Projects wrapper — 2-col layout */}
+      {/* Projects list */}
       <div style={{ marginBottom: 'clamp(4rem,8vw,7rem)' }}>
         {projects.map((p, i) => (
           <article
@@ -216,8 +213,7 @@ export default function Works() {
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              borderBottom: '1px solid rgba(255,255,255,0.06)',
-              background: '#080808',
+              background: '#F5F0E1',
               position: 'relative',
             }}
           >
@@ -235,9 +231,9 @@ export default function Works() {
                 <span
                   className="card-num"
                   style={{
-                    fontFamily: 'var(--font-jetbrains)',
-                    fontSize: 'var(--text-xs)',
-                    color: 'rgba(240,240,238,0.32)',
+                    fontFamily: 'var(--font-caprasimo)',
+                    fontSize: '0.7rem',
+                    color: 'rgba(87, 70, 52, 0.32)',
                     letterSpacing: '0.08em',
                     transition: 'color 300ms',
                   }}
@@ -248,11 +244,11 @@ export default function Works() {
                   <h3
                     ref={el => { if (el) titleRefs.current[i] = el }}
                     style={{
-                      fontFamily: 'var(--font-syne)',
-                      fontWeight: 700,
+                      fontFamily: 'var(--font-abril)',
+                      fontWeight: 400,
                       fontSize: 'clamp(1.25rem,2.5vw,1.75rem)',
-                      letterSpacing: '-0.02em',
-                      color: '#F0F0EE',
+                      letterSpacing: '-0.01em',
+                      color: '#574634',
                       lineHeight: 1.1,
                     }}
                   >
@@ -264,9 +260,9 @@ export default function Works() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                 <span
                   style={{
-                    fontFamily: 'var(--font-jetbrains)',
-                    fontSize: 'var(--text-xs)',
-                    color: 'rgba(240,240,238,0.3)',
+                    fontFamily: 'var(--font-caprasimo)',
+                    fontSize: '0.65rem',
+                    color: 'rgba(87, 70, 52, 0.4)',
                     letterSpacing: '0.06em',
                   }}
                 >
@@ -278,9 +274,9 @@ export default function Works() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
-                      fontFamily: 'var(--font-jetbrains)',
-                      fontSize: 'var(--text-xs)',
-                      color: '#BFFF00',
+                      fontFamily: 'var(--font-caprasimo)',
+                      fontSize: '0.65rem',
+                      color: '#DA9100',
                       textDecoration: 'none',
                       letterSpacing: '0.06em',
                       transition: 'opacity 200ms',
@@ -299,7 +295,7 @@ export default function Works() {
               className="works-card-right"
               style={{
                 padding: 'clamp(2rem,4vw,3rem) 0 clamp(2rem,4vw,3rem) clamp(1rem,2vw,2rem)',
-                borderLeft: '1px solid rgba(255,255,255,0.06)',
+                borderLeft: '2px solid rgba(87, 70, 52, 0.12)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1rem',
@@ -308,12 +304,12 @@ export default function Works() {
               {/* Type badge */}
               <span
                 style={{
-                  fontFamily: 'var(--font-jetbrains)',
+                  fontFamily: 'var(--font-caprasimo)',
                   fontSize: '0.6rem',
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  color: 'rgba(191,255,0,0.6)',
-                  borderLeft: '1.5px solid rgba(191,255,0,0.4)',
+                  color: '#B7410E',
+                  borderLeft: '2px solid rgba(183, 65, 14, 0.5)',
                   paddingLeft: '0.6rem',
                 }}
               >
@@ -323,9 +319,9 @@ export default function Works() {
               {/* Descrizione */}
               <p
                 style={{
-                  fontFamily: 'var(--font-inter)',
+                  fontFamily: 'var(--font-fraunces)',
                   fontSize: 'var(--text-sm)',
-                  color: 'rgba(240,240,238,0.5)',
+                  color: 'rgba(87, 70, 52, 0.6)',
                   lineHeight: 1.75,
                 }}
               >
@@ -341,13 +337,13 @@ export default function Works() {
                   <span
                     key={t}
                     style={{
-                      fontFamily: 'var(--font-jetbrains)',
+                      fontFamily: 'var(--font-caprasimo)',
                       fontSize: '0.6rem',
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
                       padding: '0.3rem 0.75rem',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      color: 'rgba(240,240,238,0.4)',
+                      border: '1.5px solid rgba(86, 130, 3, 0.35)',
+                      color: '#568203',
                     }}
                   >
                     {t}
@@ -368,9 +364,9 @@ export default function Works() {
       >
         <p
           style={{
-            fontFamily: 'var(--font-jetbrains)',
-            fontSize: 'var(--text-xs)',
-            color: 'rgba(240,240,238,0.25)',
+            fontFamily: 'var(--font-caprasimo)',
+            fontSize: '0.7rem',
+            color: 'rgba(87, 70, 52, 0.4)',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
             marginBottom: 'clamp(2rem,4vw,3rem)',
@@ -385,7 +381,7 @@ export default function Works() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 420px), 1fr))',
             gap: '1px',
-            background: 'rgba(255,255,255,0.04)',
+            background: 'rgba(87, 70, 52, 0.12)',
           }}
         >
           {stages.map((s, i) => (
@@ -393,18 +389,18 @@ export default function Works() {
               key={i}
               ref={el => { if (el) stageRefs.current[i] = el }}
               style={{
-                background: '#080808',
+                background: '#F5F0E1',
                 padding: 'clamp(1.5rem,3vw,2rem)',
-                borderTop: '1px solid rgba(255,255,255,0.04)',
+                borderTop: '1px solid rgba(87, 70, 52, 0.08)',
                 opacity: 0,
               }}
             >
               <p
                 style={{
-                  fontFamily: 'var(--font-jetbrains)',
+                  fontFamily: 'var(--font-caprasimo)',
                   fontSize: '0.6rem',
                   letterSpacing: '0.1em',
-                  color: 'rgba(240,240,238,0.22)',
+                  color: 'rgba(87, 70, 52, 0.35)',
                   marginBottom: '0.75rem',
                   textTransform: 'uppercase',
                 }}
@@ -413,10 +409,10 @@ export default function Works() {
               </p>
               <p
                 style={{
-                  fontFamily: 'var(--font-syne)',
-                  fontWeight: 700,
+                  fontFamily: 'var(--font-abril)',
+                  fontWeight: 400,
                   fontSize: 'clamp(0.875rem,1.5vw,1.125rem)',
-                  color: '#F0F0EE',
+                  color: '#574634',
                   marginBottom: '0.3rem',
                   letterSpacing: '-0.01em',
                 }}
@@ -425,11 +421,11 @@ export default function Works() {
               </p>
               <p
                 style={{
-                  fontFamily: 'var(--font-jetbrains)',
+                  fontFamily: 'var(--font-caprasimo)',
                   fontSize: '0.6rem',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  color: 'rgba(191,255,0,0.5)',
+                  color: '#DA9100',
                   marginBottom: '1rem',
                 }}
               >
@@ -437,9 +433,9 @@ export default function Works() {
               </p>
               <p
                 style={{
-                  fontFamily: 'var(--font-inter)',
+                  fontFamily: 'var(--font-fraunces)',
                   fontSize: 'var(--text-sm)',
-                  color: 'rgba(240,240,238,0.38)',
+                  color: 'rgba(87, 70, 52, 0.5)',
                   lineHeight: 1.65,
                 }}
               >
@@ -449,42 +445,6 @@ export default function Works() {
           ))}
         </div>
       </motion.div>
-
-      <style>{`
-        .works-card {
-          position: relative;
-          transition: background 300ms;
-        }
-        .works-card::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          height: 1px;
-          width: 0;
-          background: #BFFF00;
-          transition: width 450ms cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .works-card:hover::after {
-          width: 100%;
-        }
-        .works-card:hover {
-          background: rgba(191,255,0,0.015) !important;
-        }
-        .works-card:hover .card-num {
-          color: #BFFF00 !important;
-        }
-        @media (max-width: 767px) {
-          .works-card {
-            grid-template-columns: 1fr !important;
-          }
-          .works-card-right {
-            border-left: none !important;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding-left: 0 !important;
-          }
-        }
-      `}</style>
     </section>
   )
 }

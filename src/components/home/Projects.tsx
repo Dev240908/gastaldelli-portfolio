@@ -54,13 +54,12 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
         ...spanStyle,
         position: 'relative',
         minHeight: 240,
-        background: project.coverImage ? '#0f0f0f' : '#111',
-        border: '1px solid rgba(255,255,255,0.06)',
+        background: project.coverImage ? '#0f0f0f' : 'rgba(218,145,0,0.08)',
+        border: '1px solid rgba(87,70,52,0.15)',
         overflow: 'hidden',
         cursor: 'none',
       }}
     >
-      {/* Immagine copertina */}
       {project.coverImage && (
         <Image
           src={project.coverImage}
@@ -75,55 +74,52 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
         />
       )}
 
-      {/* Placeholder grafico se no coverImage */}
       {!project.coverImage && (
         <div style={{
           position: 'absolute', inset: 0,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: 'rgba(191,255,0,0.15)',
-          fontFamily: 'var(--font-syne)',
+          color: 'rgba(218,145,0,0.25)',
+          fontFamily: 'var(--font-abril)',
           fontSize: 'clamp(2rem,4vw,4rem)',
-          fontWeight: 800,
-          letterSpacing: '-0.04em',
+          fontWeight: 400,
+          letterSpacing: '-0.02em',
         }}>
           {project.title.slice(0, 2).toUpperCase()}
         </div>
       )}
 
-      {/* Overlay */}
       <div style={{
         position: 'absolute', inset: 0,
         background: hovered
-          ? 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 55%, rgba(191,255,0,0.04) 100%)'
-          : 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)',
+          ? 'linear-gradient(to top, rgba(87,70,52,0.88) 0%, rgba(87,70,52,0.35) 55%, rgba(218,145,0,0.04) 100%)'
+          : 'linear-gradient(to top, rgba(87,70,52,0.65) 0%, transparent 55%)',
         transition: 'background 350ms ease',
         zIndex: 1,
       }} />
 
-      {/* Info */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0,
         padding: '1.5rem',
         zIndex: 2,
         transform: hovered ? 'translateY(0)' : 'translateY(6px)',
-        opacity: hovered ? 1 : 0.8,
+        opacity: hovered ? 1 : 0.85,
         transition: 'transform 350ms var(--ease-expo), opacity 300ms ease',
       }}>
         <p style={{
-          fontFamily: 'var(--font-jetbrains)',
+          fontFamily: 'var(--font-caprasimo)',
           fontSize: '0.6rem',
           letterSpacing: '0.14em',
           textTransform: 'uppercase',
-          color: hovered ? '#BFFF00' : 'rgba(240,240,238,0.4)',
+          color: hovered ? '#DA9100' : 'rgba(245,240,225,0.5)',
           marginBottom: '0.4rem',
           transition: 'color 200ms',
         }}>{project.category} · {project.year}</p>
         <h3 style={{
-          fontFamily: 'var(--font-syne)',
-          fontWeight: 700,
+          fontFamily: 'var(--font-abril)',
+          fontWeight: 400,
           fontSize: 'clamp(0.875rem,1.8vw,1.25rem)',
-          letterSpacing: '-0.02em',
-          color: '#F0F0EE',
+          letterSpacing: '-0.01em',
+          color: '#F5F0E1',
           lineHeight: 1.15,
         }}>{project.title}</h3>
       </div>
@@ -140,7 +136,7 @@ function ProjectsEmptyState() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       style={{
-        border: '1px dashed rgba(191,255,0,0.2)',
+        border: '2px dashed rgba(218,145,0,0.3)',
         padding: 'clamp(3rem,8vw,6rem) clamp(1.5rem,4vw,3rem)',
         textAlign: 'center',
         display: 'flex',
@@ -151,35 +147,37 @@ function ProjectsEmptyState() {
     >
       <div style={{
         width: 56, height: 56,
-        border: '1px solid rgba(191,255,0,0.15)',
+        border: '2px solid rgba(218,145,0,0.3)',
+        boxShadow: '3px 3px 0 0 rgba(87,70,52,0.2)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: 'rgba(191,255,0,0.4)',
+        color: '#DA9100',
         fontSize: '1.25rem',
-        fontFamily: 'var(--font-jetbrains)',
+        fontFamily: 'var(--font-fraunces)',
       }}>✦</div>
 
       <div>
         <p style={{
-          fontFamily: 'var(--font-jetbrains)',
-          fontSize: '0.6rem',
+          fontFamily: 'var(--font-caprasimo)',
+          fontSize: '0.65rem',
           letterSpacing: '0.14em',
           textTransform: 'uppercase',
-          color: 'rgba(191,255,0,0.4)',
+          color: '#DA9100',
           marginBottom: '0.75rem',
         }}>In preparazione</p>
         <p style={{
-          fontFamily: 'var(--font-syne)',
-          fontWeight: 700,
+          fontFamily: 'var(--font-abril)',
+          fontWeight: 400,
           fontSize: 'clamp(1.25rem,2.5vw,1.75rem)',
-          color: '#F0F0EE',
-          letterSpacing: '-0.02em',
+          color: '#574634',
+          letterSpacing: '-0.01em',
           marginBottom: '0.75rem',
           lineHeight: 1.2,
         }}>Lavori in arrivo</p>
         <p style={{
-          fontFamily: 'var(--font-inter)',
+          fontFamily: 'var(--font-fraunces)',
+          fontStyle: 'italic',
           fontSize: 'var(--text-sm)',
-          color: 'rgba(240,240,238,0.35)',
+          color: 'rgba(87,70,52,0.5)',
           lineHeight: 1.75,
           maxWidth: 420,
           margin: '0 auto',
@@ -200,23 +198,23 @@ function ProjectsEmptyState() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              fontFamily: 'var(--font-jetbrains)',
-              fontSize: '0.6rem',
+              fontFamily: 'var(--font-caprasimo)',
+              fontSize: '0.65rem',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               padding: '0.6rem 1.25rem',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: 'rgba(240,240,238,0.5)',
+              border: '2px solid rgba(87,70,52,0.2)',
+              color: 'rgba(87,70,52,0.5)',
               textDecoration: 'none',
               transition: 'border-color 200ms, color 200ms',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'rgba(191,255,0,0.3)'
-              e.currentTarget.style.color = '#BFFF00'
+              e.currentTarget.style.borderColor = '#DA9100'
+              e.currentTarget.style.color = '#DA9100'
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
-              e.currentTarget.style.color = 'rgba(240,240,238,0.5)'
+              e.currentTarget.style.borderColor = 'rgba(87,70,52,0.2)'
+              e.currentTarget.style.color = 'rgba(87,70,52,0.5)'
             }}
           >
             {social.label}
@@ -227,7 +225,7 @@ function ProjectsEmptyState() {
   )
 }
 
-// ─── Lightbox ─────────────────────────────────────────────────────────────────
+// ─── Lightbox (dark overlay — intentional for media) ─────────────────────────
 
 function ProjectLightbox({
   state,
@@ -249,7 +247,6 @@ function ProjectLightbox({
 
   return (
     <>
-      {/* Backdrop */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -258,13 +255,12 @@ function ProjectLightbox({
         onClick={onClose}
         style={{
           position: 'fixed', inset: 0,
-          background: 'rgba(0,0,0,0.96)',
+          background: 'rgba(8,8,8,0.96)',
           zIndex: 9000,
           backdropFilter: 'blur(4px)',
         }}
       />
 
-      {/* Content */}
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
@@ -279,13 +275,12 @@ function ProjectLightbox({
           width: 'min(92vw, 1100px)',
           maxHeight: '90vh',
           background: '#0c0c0c',
-          border: '1px solid rgba(255,255,255,0.08)',
+          border: '1px solid rgba(87,70,52,0.3)',
           overflow: 'hidden auto',
           display: 'flex',
           flexDirection: 'column',
         }}
       >
-        {/* Media area */}
         <div style={{
           position: 'relative',
           width: '100%',
@@ -332,11 +327,11 @@ function ProjectLightbox({
                   transform: 'translateY(-50%)',
                   background: 'rgba(0,0,0,0.65)',
                   border: '1px solid rgba(255,255,255,0.12)',
-                  color: '#F0F0EE',
+                  color: '#F5F0E1',
                   width: 40, height: 40,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   zIndex: 2, cursor: 'none',
-                  fontFamily: 'var(--font-jetbrains)', fontSize: '1rem',
+                  fontFamily: 'var(--font-fraunces)', fontSize: '1rem',
                 }}
               >←</button>
               <button
@@ -347,11 +342,11 @@ function ProjectLightbox({
                   transform: 'translateY(-50%)',
                   background: 'rgba(0,0,0,0.65)',
                   border: '1px solid rgba(255,255,255,0.12)',
-                  color: '#F0F0EE',
+                  color: '#F5F0E1',
                   width: 40, height: 40,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   zIndex: 2, cursor: 'none',
-                  fontFamily: 'var(--font-jetbrains)', fontSize: '1rem',
+                  fontFamily: 'var(--font-fraunces)', fontSize: '1rem',
                 }}
               >→</button>
               <div style={{
@@ -363,7 +358,7 @@ function ProjectLightbox({
                   <div key={i} style={{
                     width: i === state.mediaIndex ? 20 : 6,
                     height: 6,
-                    background: i === state.mediaIndex ? '#BFFF00' : 'rgba(255,255,255,0.25)',
+                    background: i === state.mediaIndex ? '#DA9100' : 'rgba(255,255,255,0.25)',
                     transition: 'width 250ms cubic-bezier(0.16,1,0.3,1), background 250ms',
                   }} />
                 ))}
@@ -372,7 +367,6 @@ function ProjectLightbox({
           )}
         </div>
 
-        {/* Info panel */}
         <div style={{
           padding: 'clamp(1.5rem,3vw,2rem)',
           display: 'grid',
@@ -382,42 +376,42 @@ function ProjectLightbox({
         }}>
           <div>
             <span style={{
-              fontFamily: 'var(--font-jetbrains)',
+              fontFamily: 'var(--font-caprasimo)',
               fontSize: '0.6rem',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: 'rgba(191,255,0,0.7)',
-              borderLeft: '1.5px solid rgba(191,255,0,0.4)',
+              color: '#DA9100',
+              borderLeft: '2px solid rgba(218,145,0,0.4)',
               paddingLeft: '0.6rem',
               display: 'block',
               marginBottom: '0.75rem',
             }}>{project.category} · {project.year}</span>
             <h2 style={{
-              fontFamily: 'var(--font-syne)',
-              fontWeight: 800,
+              fontFamily: 'var(--font-abril)',
+              fontWeight: 400,
               fontSize: 'clamp(1.25rem,2.5vw,2rem)',
-              letterSpacing: '-0.03em',
-              color: '#F0F0EE',
+              letterSpacing: '-0.01em',
+              color: '#F5F0E1',
               marginBottom: '0.5rem',
               lineHeight: 1.1,
             }}>{project.title}</h2>
             <p style={{
-              fontFamily: 'var(--font-inter)',
+              fontFamily: 'var(--font-fraunces)',
               fontSize: 'var(--text-sm)',
-              color: 'rgba(240,240,238,0.45)',
+              color: 'rgba(245,240,225,0.5)',
               lineHeight: 1.75,
               marginBottom: '1rem',
             }}>{project.description}</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
               {project.tags.map(tag => (
                 <span key={tag} style={{
-                  fontFamily: 'var(--font-jetbrains)',
+                  fontFamily: 'var(--font-caprasimo)',
                   fontSize: '0.6rem',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   padding: '0.25rem 0.6rem',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  color: 'rgba(240,240,238,0.35)',
+                  border: '1px solid rgba(87,70,52,0.3)',
+                  color: 'rgba(245,240,225,0.4)',
                 }}>{tag}</span>
               ))}
             </div>
@@ -426,12 +420,12 @@ function ProjectLightbox({
             <button
               onClick={onClose}
               style={{
-                fontFamily: 'var(--font-jetbrains)',
+                fontFamily: 'var(--font-caprasimo)',
                 fontSize: '0.6rem',
                 letterSpacing: '0.1em',
                 background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.12)',
-                color: 'rgba(240,240,238,0.5)',
+                color: 'rgba(245,240,225,0.5)',
                 padding: '0.5rem 0.75rem',
                 cursor: 'none',
               }}
@@ -442,12 +436,12 @@ function ProjectLightbox({
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  fontFamily: 'var(--font-jetbrains)',
+                  fontFamily: 'var(--font-caprasimo)',
                   fontSize: '0.6rem',
                   letterSpacing: '0.1em',
-                  color: '#BFFF00',
+                  color: '#DA9100',
                   textDecoration: 'none',
-                  border: '1px solid rgba(191,255,0,0.3)',
+                  border: '1px solid rgba(218,145,0,0.3)',
                   padding: '0.5rem 0.75rem',
                   display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                 }}
@@ -499,7 +493,6 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
     }))
   }, [])
 
-  // Keyboard handler
   useEffect(() => {
     if (!lightbox.isOpen) return
     const handler = (e: KeyboardEvent) => {
@@ -511,7 +504,6 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
     return () => window.removeEventListener('keydown', handler)
   }, [lightbox.isOpen, closeLightbox, nextMedia, prevMedia])
 
-  // Lock body scroll quando lightbox aperto
   useEffect(() => {
     document.body.style.overflow = lightbox.isOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -529,7 +521,7 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
       id="progetti"
       style={{
         padding: 'var(--space-section) var(--space-container)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '2px solid rgba(87, 70, 52, 0.15)',
       }}
     >
       {/* Header */}
@@ -541,38 +533,39 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
         style={{ marginBottom: 'clamp(3rem,6vw,5rem)', maxWidth: 720 }}
       >
         <p style={{
-          fontFamily: 'var(--font-jetbrains)',
-          fontSize: 'var(--text-xs)',
-          color: '#BFFF00',
+          fontFamily: 'var(--font-caprasimo)',
+          fontSize: '0.7rem',
+          color: '#DA9100',
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
           marginBottom: '0.75rem',
         }}>002b / Progetti</p>
         <h2 style={{
-          fontFamily: 'var(--font-syne)',
-          fontWeight: 800,
+          fontFamily: 'var(--font-abril)',
+          fontWeight: 400,
           fontSize: 'var(--text-display)',
           lineHeight: 'var(--lh-display)',
-          letterSpacing: '-0.03em',
-          color: '#F0F0EE',
+          letterSpacing: '-0.01em',
+          color: '#574634',
           marginBottom: '1.5rem',
         }}>
           Creatività applicata.<br />
-          <span style={{ WebkitTextStroke: '1.5px rgba(240,240,238,0.2)', color: 'transparent' }}>
+          <span style={{ color: 'rgba(87,70,52,0.3)' }}>
             Ogni formato.
           </span>
         </h2>
         <p style={{
-          fontFamily: 'var(--font-inter)',
+          fontFamily: 'var(--font-fraunces)',
+          fontStyle: 'italic',
           fontSize: 'var(--text-base)',
-          color: 'rgba(240,240,238,0.55)',
+          color: 'rgba(87,70,52,0.6)',
           lineHeight: 1.6,
         }}>
           Grafica, video, web design, motion e molto altro — anni di lavoro su progetti reali.
         </p>
       </motion.div>
 
-      {/* Category filter — visibile solo se ci sono progetti */}
+      {/* Category filter */}
       {items.length > 0 && (
         <div style={{
           display: 'flex',
@@ -580,8 +573,8 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
           flexWrap: 'wrap',
           marginBottom: 'clamp(2.5rem,5vw,4rem)',
           padding: '4px',
-          background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          background: 'rgba(87,70,52,0.04)',
+          border: '2px solid rgba(87,70,52,0.15)',
           width: 'fit-content',
         }}>
           {CATEGORIES.map(cat => (
@@ -589,14 +582,14 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
               style={{
-                fontFamily: 'var(--font-jetbrains)',
-                fontSize: '0.6rem',
+                fontFamily: 'var(--font-caprasimo)',
+                fontSize: '0.65rem',
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 padding: '0.5rem 1rem',
-                background: activeCategory === cat.value ? '#BFFF00' : 'transparent',
-                color: activeCategory === cat.value ? '#080808' : 'rgba(240,240,238,0.4)',
-                border: 'none',
+                background: activeCategory === cat.value ? '#DA9100' : 'transparent',
+                color: activeCategory === cat.value ? '#F5F0E1' : 'rgba(87,70,52,0.45)',
+                border: activeCategory === cat.value ? '1px solid #574634' : '1px solid transparent',
                 cursor: 'none',
                 transition: 'background 200ms, color 200ms',
                 fontWeight: activeCategory === cat.value ? 600 : 400,
@@ -608,7 +601,6 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
         </div>
       )}
 
-      {/* Gallery bento o empty state */}
       {items.length === 0 ? (
         <ProjectsEmptyState />
       ) : (
@@ -620,7 +612,7 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
               gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))',
               gridAutoRows: '240px',
               gap: '1px',
-              background: 'rgba(255,255,255,0.04)',
+              background: 'rgba(87,70,52,0.12)',
             }}
           >
             {filteredProjects.map(p => (
@@ -634,7 +626,6 @@ export default function Projects({ items = defaultProjects }: ProjectsProps) {
         </AnimatePresence>
       )}
 
-      {/* Lightbox portal */}
       {isMounted && lightbox.isOpen && lightbox.project && createPortal(
         <AnimatePresence>
           <ProjectLightbox

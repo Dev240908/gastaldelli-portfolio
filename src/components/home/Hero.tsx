@@ -1,65 +1,52 @@
 'use client'
+/* Decision: rimosso HeroGLCanvas — shader WebGL scuro incompatibile con warm cream.
+   Sostituito con CSS blob-morphing + motivo geometrico per estetica groovy anni '70. */
 import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
-import HeroGLCanvas from './HeroGLCanvas'
 import MarqueeStrip from './MarqueeStrip'
 
 export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null)
-  const line1Ref     = useRef<HTMLSpanElement>(null)
-  const line2Ref     = useRef<HTMLSpanElement>(null)
-  const line3Ref     = useRef<HTMLSpanElement>(null)
-  const metaRef      = useRef<HTMLDivElement>(null)
-  const ctaRef       = useRef<HTMLDivElement>(null)
-  const scrollRef    = useRef<HTMLDivElement>(null)
-  const marqueeRef   = useRef<HTMLDivElement>(null)
+  const containerRef  = useRef<HTMLElement>(null)
+  const line1Ref      = useRef<HTMLSpanElement>(null)
+  const line2Ref      = useRef<HTMLSpanElement>(null)
+  const line3Ref      = useRef<HTMLSpanElement>(null)
+  const subRef        = useRef<HTMLParagraphElement>(null)
+  const ctaRef        = useRef<HTMLDivElement>(null)
+  const scrollRef     = useRef<HTMLDivElement>(null)
+  const marqueeRef    = useRef<HTMLDivElement>(null)
   const primaryBtnRef = useRef<HTMLAnchorElement>(null)
 
-  // entrance animation
+  /* Entrance animation — stagger page load */
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
       tl.from([line1Ref.current, line2Ref.current, line3Ref.current], {
-          yPercent: 110, duration: 1.1, stagger: 0.08, delay: 0.2,
+          yPercent: 110, duration: 1.1, stagger: 0.09, delay: 0.25,
         })
-        .from(metaRef.current,    { opacity: 0, y: 12, duration: 0.6 }, '-=0.5')
-        .from(ctaRef.current,     { opacity: 0, y: 12, duration: 0.6 }, '-=0.4')
-        .from(marqueeRef.current, { opacity: 0, duration: 0.8 },        '-=0.2')
-        .from(scrollRef.current,  { opacity: 0, duration: 0.6 },        '-=0.4')
+        .from(subRef.current,     { opacity: 0, y: 16, duration: 0.7 }, '-=0.4')
+        .from(ctaRef.current,     { opacity: 0, y: 16, duration: 0.6 }, '-=0.35')
+        .from(marqueeRef.current, { opacity: 0, duration: 0.8 },         '-=0.2')
+        .from(scrollRef.current,  { opacity: 0, duration: 0.6 },         '-=0.4')
     }, containerRef)
     return () => ctx.revert()
   }, [])
 
-  // magnetic button
+  /* Magnetic CTA */
   useEffect(() => {
     const btn = primaryBtnRef.current
     if (!btn) return
-
-    const strength = 0.45
+    const strength = 0.4
     let rect = btn.getBoundingClientRect()
-
     const onEnter = () => { rect = btn.getBoundingClientRect() }
-
     const onMove = (e: MouseEvent) => {
-      const cx = rect.left + rect.width  / 2
-      const cy = rect.top  + rect.height / 2
+      const cx = rect.left + rect.width / 2
+      const cy = rect.top + rect.height / 2
       const dx = e.clientX - cx
       const dy = e.clientY - cy
-      const d  = Math.hypot(dx, dy)
-      const maxR = Math.max(rect.width, rect.height) * 1.2
-      if (d > maxR) return
-      gsap.to(btn, {
-        x: dx * strength,
-        y: dy * strength,
-        duration: 0.4,
-        ease: 'power2.out',
-      })
+      if (Math.hypot(dx, dy) > Math.max(rect.width, rect.height) * 1.2) return
+      gsap.to(btn, { x: dx * strength, y: dy * strength, duration: 0.4, ease: 'power2.out' })
     }
-
-    const onLeave = () => {
-      gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' })
-    }
-
+    const onLeave = () => gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.4)' })
     btn.addEventListener('mouseenter', onEnter)
     btn.addEventListener('mousemove',  onMove)
     btn.addEventListener('mouseleave', onLeave)
@@ -78,28 +65,79 @@ export default function Hero() {
         minHeight: '100svh',
         display: 'flex',
         flexDirection: 'column',
+        background: 'var(--warm-cream)',
         overflow: 'hidden',
       }}
     >
-      {/* WebGL animated background */}
-      <HeroGLCanvas />
+      {/* ——— Blob decorativi CSS ——— */}
 
-      {/* Status badge — top left */}
+      {/* Blob 1 — harvest gold, top-right, grande */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '-10%',
+          right: '-8%',
+          width: 'clamp(320px, 42vw, 650px)',
+          height: 'clamp(320px, 42vw, 650px)',
+          background: 'radial-gradient(circle at 40% 40%, #FAE679 0%, #DA9100 60%, transparent 80%)',
+          opacity: 0.28,
+          animation: 'blob-morph 16s ease-in-out infinite',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Blob 2 — rust orange, bottom-left, piccolo */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: '8%',
+          left: '-6%',
+          width: 'clamp(180px, 22vw, 380px)',
+          height: 'clamp(180px, 22vw, 380px)',
+          background: 'radial-gradient(circle at 60% 60%, #E45356 0%, #B7410E 55%, transparent 80%)',
+          opacity: 0.18,
+          animation: 'blob-morph-slow 20s ease-in-out infinite reverse',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Blob 3 — avocado, centro sinistra, accento */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '35%',
+          left: '2%',
+          width: 'clamp(100px, 12vw, 200px)',
+          height: 'clamp(100px, 12vw, 200px)',
+          background: 'var(--avocado)',
+          opacity: 0.12,
+          animation: 'blob-morph 22s ease-in-out infinite 4s',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* ——— Badge "Disponibile" — top left ——— */}
       <div
         style={{
           position: 'absolute',
-          top: 'clamp(5rem,10vh,7rem)',
+          top: 'clamp(5rem, 10vh, 7rem)',
           left: 'var(--space-container)',
-          zIndex: 1,
+          zIndex: 2,
         }}
       >
         <span className="tag tag-accent">
           <span
             style={{
-              width: 5,
-              height: 5,
+              width: 6,
+              height: 6,
               borderRadius: '50%',
-              background: '#BFFF00',
+              background: '#B7410E',
               display: 'inline-block',
               animation: 'pulse 2s infinite',
             }}
@@ -108,154 +146,113 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* Index — top right */}
+      {/* ——— Numero sezione — top right ——— */}
       <div
         style={{
           position: 'absolute',
-          top: 'clamp(5rem,10vh,7rem)',
+          top: 'clamp(5rem, 10vh, 7rem)',
           right: 'var(--space-container)',
-          fontFamily: 'var(--font-jetbrains)',
-          fontSize: 'var(--text-xs)',
-          color: 'rgba(240,240,238,0.2)',
-          letterSpacing: '0.08em',
-          zIndex: 1,
+          fontFamily: 'var(--font-caprasimo)',
+          fontSize: '0.7rem',
+          color: 'rgba(87, 70, 52, 0.3)',
+          letterSpacing: '0.1em',
+          zIndex: 2,
         }}
       >
         001 / HERO
       </div>
 
-      {/* Spacer: fills available space, but never shrinks below nav height */}
+      {/* ——— Spacer — mantiene il titolo sotto la nav ——— */}
       <div aria-hidden="true" style={{ flex: '1 1 0', minHeight: 'clamp(5rem, 10vh, 7rem)' }} />
 
-      {/* Content */}
-      <div style={{ position: 'relative', zIndex: 1, padding: '0 var(--space-container)' }}>
-        {/* Main headline */}
+      {/* ——— Contenuto principale ——— */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          padding: '0 var(--space-container)',
+        }}
+      >
+        {/* Headline — Abril Fatface, salto dimensionale estremo */}
         <h1
           aria-label="Il digitale che lavora per te."
           style={{
-            fontFamily: 'var(--font-syne)',
-            fontWeight: 800,
-            fontSize: 'clamp(2rem, 7.5vw, 7rem)',
-            lineHeight: 1.02,
-            letterSpacing: '-0.03em',
-            color: '#F0F0EE',
-            marginBottom: 'clamp(1.75rem,3.5vh,2.75rem)',
+            fontFamily: 'var(--font-abril)',
+            fontWeight: 400,
+            fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+            lineHeight: 1.0,
+            letterSpacing: '-0.01em',
+            color: '#574634',
+            marginBottom: 'clamp(1.5rem, 3vh, 2.5rem)',
           }}
         >
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.08em' }}>
-            <span ref={line1Ref} style={{ display: 'block' }}>Il&nbsp;digitale</span>
-          </span>
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.08em' }}>
-            <span ref={line2Ref} style={{ display: 'block' }}>
-              che&nbsp;<span style={{ WebkitTextStroke: '1.5px #BFFF00', color: 'transparent' }}>lavora</span>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.05em' }}>
+            <span ref={line1Ref} style={{ display: 'block' }}>
+              Il&nbsp;digitale
             </span>
           </span>
-          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.12em' }}>
-            <span ref={line3Ref} style={{ display: 'block' }}>per&nbsp;te.</span>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.05em' }}>
+            <span ref={line2Ref} style={{ display: 'block' }}>
+              che&nbsp;
+              {/* "lavora" in harvest gold — accentuazione calda */}
+              <span style={{ color: '#DA9100' }}>lavora</span>
+            </span>
+          </span>
+          <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.08em' }}>
+            <span ref={line3Ref} style={{ display: 'block' }}>
+              per&nbsp;te.
+            </span>
           </span>
         </h1>
 
-        {/* Meta row */}
-        <div
-          ref={metaRef}
+        {/* Sottotitolo — Playfair Display italic, tono caldo */}
+        <p
+          ref={subRef}
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '2rem',
-            marginBottom: 'clamp(2rem,4vh,3rem)',
-            flexWrap: 'wrap',
+            fontFamily: 'var(--font-playfair)',
+            fontStyle: 'italic',
+            fontWeight: 400,
+            fontSize: 'clamp(1rem, 1.8vw, 1.375rem)',
+            color: 'rgba(87, 70, 52, 0.65)',
+            maxWidth: 480,
+            lineHeight: 1.55,
+            marginBottom: 'clamp(2rem, 4vh, 3rem)',
           }}
         >
-          <p
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontWeight: 500,
-              fontSize: 'var(--text-sm)',
-              color: 'rgba(240,240,238,0.6)',
-              letterSpacing: '0.01em',
-            }}
-          >
-            Brian Gastaldelli&nbsp;·&nbsp;Verona
-          </p>
-          <span style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.12)', flexShrink: 0 }} />
-          <p
-            style={{
-              fontFamily: 'var(--font-jetbrains)',
-              fontWeight: 400,
-              fontSize: 'var(--text-xs)',
-              color: 'rgba(240,240,238,0.3)',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-            }}
-          >
-            Web · App · Automazioni AI
-          </p>
-        </div>
+          Brian Gastaldelli · Siti web, automazioni AI<br />
+          e sistemi digitali per PMI. Basato a Verona.
+        </p>
 
-        {/* CTA */}
-        <div ref={ctaRef} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        {/* CTA row */}
+        <div
+          ref={ctaRef}
+          style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}
+        >
+          {/* Primary CTA — groovy red, offset shadow */}
           <a
             ref={primaryBtnRef}
             href="#lavori"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              padding: '0.9rem 2rem',
-              background: '#BFFF00',
-              color: '#080808',
-              fontFamily: 'var(--font-syne)',
-              fontWeight: 700,
-              fontSize: '0.8125rem',
-              letterSpacing: '0.04em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              transition: 'background 200ms',
-              willChange: 'transform',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#d4ff4d')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#BFFF00')}
+            className="btn-groovy"
+            style={{ willChange: 'transform' }}
           >
             Vedi i lavori
-            <span style={{ fontSize: '1rem', lineHeight: 1 }}>↓</span>
+            <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>↓</span>
           </a>
-          <a
-            href="mailto:brian@gastaldelli.it"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              padding: '0.9rem 2rem',
-              border: '1px solid rgba(255,255,255,0.12)',
-              color: 'rgba(240,240,238,0.65)',
-              fontFamily: 'var(--font-syne)',
-              fontWeight: 600,
-              fontSize: '0.8125rem',
-              letterSpacing: '0.04em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              transition: 'border-color 200ms, color 200ms',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
-              e.currentTarget.style.color = '#F0F0EE'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
-              e.currentTarget.style.color = 'rgba(240,240,238,0.65)'
-            }}
-          >
-            Contattami
+
+          {/* Ghost CTA */}
+          <a href="mailto:brian@gastaldelli.it" className="btn-ghost">
+            Scrivimi
           </a>
         </div>
 
         {/* Marquee strip */}
-        <div ref={marqueeRef} style={{ marginTop: 'clamp(3rem,6vh,5rem)' }}>
+        <div ref={marqueeRef} style={{ marginTop: 'clamp(3rem, 6vh, 5rem)' }}>
           <MarqueeStrip />
         </div>
       </div>
 
       {/* Bottom spacer */}
-      <div style={{ height: 'clamp(2.5rem,5vh,4rem)', position: 'relative', zIndex: 1 }} />
+      <div style={{ height: 'clamp(2.5rem, 5vh, 4rem)', position: 'relative', zIndex: 2 }} />
 
       {/* Scroll indicator */}
       <div
@@ -263,29 +260,29 @@ export default function Hero() {
         aria-hidden="true"
         style={{
           position: 'absolute',
-          bottom: 'clamp(2rem,5vh,3.5rem)',
+          bottom: 'clamp(2rem, 5vh, 3.5rem)',
           right: 'var(--space-container)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '0.5rem',
-          zIndex: 1,
+          zIndex: 2,
         }}
       >
         <div
           style={{
-            width: 1,
-            height: 60,
-            background: 'linear-gradient(to bottom, rgba(191,255,0,0.7), transparent)',
+            width: 2,
+            height: 56,
+            background: 'linear-gradient(to bottom, #DA9100, transparent)',
             animation: 'scrollLine 2s ease-in-out infinite',
           }}
         />
         <span
           style={{
-            fontFamily: 'var(--font-jetbrains)',
-            fontSize: '0.5625rem',
-            color: 'rgba(240,240,238,0.2)',
-            letterSpacing: '0.15em',
+            fontFamily: 'var(--font-caprasimo)',
+            fontSize: '0.6rem',
+            color: 'rgba(87, 70, 52, 0.35)',
+            letterSpacing: '0.12em',
             textTransform: 'uppercase',
             writingMode: 'vertical-rl',
           }}
@@ -293,19 +290,6 @@ export default function Hero() {
           Scroll
         </span>
       </div>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0.3; }
-        }
-        @keyframes scrollLine {
-          0%   { transform: scaleY(0); transform-origin: top; }
-          50%  { transform: scaleY(1); transform-origin: top; }
-          51%  { transform: scaleY(1); transform-origin: bottom; }
-          100% { transform: scaleY(0); transform-origin: bottom; }
-        }
-      `}</style>
     </section>
   )
 }

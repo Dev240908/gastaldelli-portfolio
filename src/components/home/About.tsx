@@ -30,7 +30,6 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Counter animation
       stats.forEach((s, i) => {
         const el = counterEls.current[i]
         if (!el) return
@@ -50,7 +49,6 @@ export default function About() {
         })
       })
 
-      // Bio clip reveal
       ;[bioWrapper1.current, bioWrapper2.current].forEach((wrapper, i) => {
         if (!wrapper) return
         gsap.fromTo(
@@ -70,7 +68,6 @@ export default function About() {
         )
       })
 
-      // Discipline items slide in
       discItemRefs.current.forEach((item) => {
         if (!item) return
         gsap.fromTo(
@@ -90,7 +87,6 @@ export default function About() {
         )
       })
 
-      // Discipline separator lines scaleX
       discLineRefs.current.forEach((line, i) => {
         if (!line) return
         gsap.fromTo(
@@ -119,10 +115,10 @@ export default function About() {
       id="about"
       style={{
         padding: 'var(--space-section) var(--space-container)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '2px solid rgba(87, 70, 52, 0.15)',
       }}
     >
-      {/* STAT ROW — 3 counter animati */}
+      {/* STAT ROW */}
       <div
         ref={statsRowRef}
         className="about-stats-grid"
@@ -130,8 +126,8 @@ export default function About() {
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '1px',
-          background: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          background: 'rgba(87, 70, 52, 0.15)',
+          border: '2px solid rgba(87, 70, 52, 0.2)',
           marginBottom: 'clamp(3rem,6vw,5rem)',
         }}
       >
@@ -139,7 +135,7 @@ export default function About() {
           <div
             key={i}
             style={{
-              background: '#080808',
+              background: '#F5F0E1',
               padding: 'clamp(1.5rem,3vw,2.5rem)',
               display: 'flex',
               flexDirection: 'column',
@@ -149,11 +145,11 @@ export default function About() {
             <span
               ref={el => { if (el) counterEls.current[i] = el }}
               style={{
-                fontFamily: 'var(--font-syne)',
-                fontWeight: 800,
+                fontFamily: 'var(--font-abril)',
+                fontWeight: 400,
                 fontSize: 'clamp(2.5rem,5vw,4rem)',
-                letterSpacing: '-0.04em',
-                color: '#F0F0EE',
+                letterSpacing: '-0.02em',
+                color: '#574634',
                 lineHeight: 1,
               }}
             >
@@ -161,11 +157,11 @@ export default function About() {
             </span>
             <span
               style={{
-                fontFamily: 'var(--font-jetbrains)',
-                fontSize: 'var(--text-xs)',
+                fontFamily: 'var(--font-caprasimo)',
+                fontSize: '0.65rem',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: 'rgba(240,240,238,0.3)',
+                color: 'rgba(87, 70, 52, 0.4)',
               }}
             >
               {s.label}
@@ -174,7 +170,7 @@ export default function About() {
         ))}
       </div>
 
-      {/* MAIN GRID — bio sinistra + disciplines destra */}
+      {/* MAIN GRID */}
       <div
         style={{
           display: 'grid',
@@ -186,9 +182,9 @@ export default function About() {
         {/* Left: bio */}
         <div>
           <p style={{
-            fontFamily: 'var(--font-jetbrains)',
-            fontSize: 'var(--text-xs)',
-            color: '#BFFF00',
+            fontFamily: 'var(--font-caprasimo)',
+            fontSize: '0.7rem',
+            color: '#DA9100',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             marginBottom: '1.5rem',
@@ -197,24 +193,23 @@ export default function About() {
           </p>
 
           <h2 style={{
-            fontFamily: 'var(--font-syne)',
-            fontWeight: 800,
+            fontFamily: 'var(--font-abril)',
+            fontWeight: 400,
             fontSize: 'var(--text-heading)',
             lineHeight: 'var(--lh-heading)',
-            letterSpacing: '-0.03em',
-            color: '#F0F0EE',
+            letterSpacing: '-0.01em',
+            color: '#574634',
             marginBottom: 'clamp(1.5rem,3vw,2.5rem)',
           }}>
             Verona.<br />
-            <span style={{ color: '#BFFF00' }}>Digitale che funziona.</span>
+            <span style={{ color: '#DA9100' }}>Digitale che funziona.</span>
           </h2>
 
-          {/* Bio paragrafo 1 — con clipPath reveal */}
           <div ref={bioWrapper1} style={{ overflow: 'hidden', marginBottom: '1.25rem' }}>
             <p style={{
-              fontFamily: 'var(--font-inter)',
+              fontFamily: 'var(--font-fraunces)',
               fontSize: 'var(--text-base)',
-              color: 'rgba(240,240,238,0.55)',
+              color: 'rgba(87, 70, 52, 0.65)',
               lineHeight: 1.8,
               maxWidth: 440,
             }}>
@@ -225,12 +220,12 @@ export default function About() {
             </p>
           </div>
 
-          {/* Bio paragrafo 2 — con clipPath reveal */}
           <div ref={bioWrapper2} style={{ overflow: 'hidden', marginBottom: '2rem' }}>
             <p style={{
-              fontFamily: 'var(--font-inter)',
+              fontFamily: 'var(--font-fraunces)',
+              fontStyle: 'italic',
               fontSize: 'var(--text-base)',
-              color: 'rgba(240,240,238,0.35)',
+              color: 'rgba(87, 70, 52, 0.42)',
               lineHeight: 1.8,
               maxWidth: 440,
             }}>
@@ -247,24 +242,23 @@ export default function About() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.75rem',
-              fontFamily: 'var(--font-syne)',
-              fontWeight: 700,
-              fontSize: 'clamp(0.6875rem,2vw,0.8125rem)',
-              letterSpacing: '0.06em',
-              textTransform: 'uppercase',
-              color: '#F0F0EE',
+              fontFamily: 'var(--font-fraunces)',
+              fontWeight: 600,
+              fontSize: 'clamp(0.875rem,2vw,1rem)',
+              letterSpacing: '0.02em',
+              color: '#574634',
               textDecoration: 'none',
-              borderBottom: '1px solid rgba(255,255,255,0.2)',
+              borderBottom: '2px solid rgba(87, 70, 52, 0.3)',
               paddingBottom: '0.25rem',
               transition: 'color 200ms, border-color 200ms',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.color = '#BFFF00'
-              e.currentTarget.style.borderColor = '#BFFF00'
+              e.currentTarget.style.color = '#DA9100'
+              e.currentTarget.style.borderColor = '#DA9100'
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.color = '#F0F0EE'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
+              e.currentTarget.style.color = '#574634'
+              e.currentTarget.style.borderColor = 'rgba(87, 70, 52, 0.3)'
             }}
           >
             brian@gastaldelli.it
@@ -272,7 +266,7 @@ export default function About() {
           </a>
         </div>
 
-        {/* Right: disciplines list con GSAP */}
+        {/* Right: disciplines */}
         <div>
           {disciplines.map((d, i) => (
             <div
@@ -287,7 +281,6 @@ export default function About() {
                 opacity: 0,
               }}
             >
-              {/* Linea separatrice animabile — span con scaleX */}
               <span
                 ref={el => { if (el) discLineRefs.current[i] = el }}
                 aria-hidden="true"
@@ -297,7 +290,7 @@ export default function About() {
                   left: 0,
                   right: 0,
                   height: '1px',
-                  background: 'rgba(255,255,255,0.06)',
+                  background: 'rgba(87, 70, 52, 0.15)',
                   display: 'block',
                   transformOrigin: 'left',
                   transform: 'scaleX(0)',
@@ -305,9 +298,9 @@ export default function About() {
               />
 
               <span style={{
-                fontFamily: 'var(--font-jetbrains)',
-                fontSize: 'var(--text-xs)',
-                color: 'rgba(240,240,238,0.32)',
+                fontFamily: 'var(--font-caprasimo)',
+                fontSize: '0.65rem',
+                color: 'rgba(87, 70, 52, 0.32)',
                 letterSpacing: '0.08em',
                 paddingTop: '0.2rem',
                 flexShrink: 0,
@@ -316,19 +309,19 @@ export default function About() {
               </span>
               <div>
                 <p style={{
-                  fontFamily: 'var(--font-syne)',
-                  fontWeight: 700,
+                  fontFamily: 'var(--font-abril)',
+                  fontWeight: 400,
                   fontSize: 'clamp(1rem,1.8vw,1.25rem)',
                   letterSpacing: '-0.01em',
-                  color: '#F0F0EE',
+                  color: '#574634',
                   marginBottom: '0.25rem',
                 }}>
                   {d.label}
                 </p>
                 <p style={{
-                  fontFamily: 'var(--font-jetbrains)',
-                  fontSize: 'var(--text-xs)',
-                  color: 'rgba(240,240,238,0.3)',
+                  fontFamily: 'var(--font-caprasimo)',
+                  fontSize: '0.65rem',
+                  color: 'rgba(87, 70, 52, 0.4)',
                   letterSpacing: '0.04em',
                 }}>
                   {d.sub}
@@ -338,14 +331,6 @@ export default function About() {
           ))}
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 479px) {
-          .about-stats-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </section>
   )
 }

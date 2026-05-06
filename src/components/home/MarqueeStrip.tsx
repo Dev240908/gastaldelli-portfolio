@@ -40,11 +40,13 @@ function Strip({ reverse = false }: { reverse?: boolean }) {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '3rem',
-            fontFamily: 'var(--font-jetbrains)',
-            fontSize: 'var(--text-xs)',
+            fontFamily: 'var(--font-caprasimo)',
+            fontSize: '0.65rem',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
-            color: i % 2 === 0 ? 'rgba(240,240,238,0.18)' : 'rgba(191,255,0,0.35)',
+            color: i % 2 === 0
+              ? 'rgba(87, 70, 52, 0.5)'
+              : 'rgba(87, 70, 52, 0.28)',
             whiteSpace: 'nowrap',
           }}
         >
@@ -52,10 +54,10 @@ function Strip({ reverse = false }: { reverse?: boolean }) {
           <span
             style={{
               display: 'inline-block',
-              width: 3,
-              height: 3,
+              width: 4,
+              height: 4,
               borderRadius: '50%',
-              background: 'rgba(191,255,0,0.4)',
+              background: i % 2 === 0 ? '#DA9100' : 'rgba(218, 145, 0, 0.35)',
               flexShrink: 0,
             }}
           />
@@ -75,25 +77,14 @@ export default function MarqueeStrip() {
         display: 'flex',
         gap: '3rem',
         padding: '0.9rem 0',
-        borderTop: '1px solid rgba(255,255,255,0.05)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
+        borderTop: '1px solid rgba(87, 70, 52, 0.15)',
+        borderBottom: '1px solid rgba(87, 70, 52, 0.15)',
         maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
         WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
       }}
     >
       <Strip />
       <Strip />
-
-      <style>{`
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-        @keyframes marqueeRev {
-          from { transform: translateX(-50%); }
-          to   { transform: translateX(0); }
-        }
-      `}</style>
     </div>
   )
 }

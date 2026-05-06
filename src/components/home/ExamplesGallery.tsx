@@ -14,7 +14,7 @@ export default function ExamplesGallery() {
       id="esempi"
       style={{
         padding: 'var(--space-section) var(--space-container)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '2px solid rgba(87, 70, 52, 0.15)',
       }}
     >
       {/* Header */}
@@ -35,9 +35,9 @@ export default function ExamplesGallery() {
         <div>
           <p
             style={{
-              fontFamily: 'var(--font-jetbrains)',
-              fontSize: 'var(--text-xs)',
-              color: '#BFFF00',
+              fontFamily: 'var(--font-caprasimo)',
+              fontSize: '0.7rem',
+              color: '#DA9100',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               marginBottom: '0.75rem',
@@ -47,16 +47,16 @@ export default function ExamplesGallery() {
           </p>
           <h2
             style={{
-              fontFamily: 'var(--font-syne)',
-              fontWeight: 800,
+              fontFamily: 'var(--font-abril)',
+              fontWeight: 400,
               fontSize: 'var(--text-display)',
               lineHeight: 1,
-              letterSpacing: '-0.03em',
-              color: '#F0F0EE',
+              letterSpacing: '-0.01em',
+              color: '#574634',
             }}
           >
             Laboratorio<br />
-            <span style={{ WebkitTextStroke: '1.5px rgba(240,240,238,0.25)', color: 'transparent' }}>
+            <span style={{ color: 'rgba(87,70,52,0.3)' }}>
               tecnico.
             </span>
           </h2>
@@ -64,10 +64,10 @@ export default function ExamplesGallery() {
         <div style={{ maxWidth: 280 }}>
           <p
             style={{
-              fontFamily: 'var(--font-jetbrains)',
-              fontSize: 'var(--text-xs)',
-              color: 'rgba(240,240,238,0.3)',
-              letterSpacing: '0.05em',
+              fontFamily: 'var(--font-fraunces)',
+              fontStyle: 'italic',
+              fontSize: 'var(--text-sm)',
+              color: 'rgba(87,70,52,0.5)',
               lineHeight: 1.7,
               marginBottom: '0.75rem',
             }}
@@ -77,9 +77,9 @@ export default function ExamplesGallery() {
           </p>
           <p
             style={{
-              fontFamily: 'var(--font-jetbrains)',
+              fontFamily: 'var(--font-caprasimo)',
               fontSize: '0.65rem',
-              color: 'rgba(240,240,238,0.32)',
+              color: 'rgba(87,70,52,0.32)',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
             }}
@@ -95,8 +95,8 @@ export default function ExamplesGallery() {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))',
           gap: '1px',
-          background: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          background: 'rgba(87,70,52,0.15)',
+          border: '2px solid rgba(87,70,52,0.2)',
         }}
       >
         {examples.map((example, i) => (
@@ -113,7 +113,9 @@ export default function ExamplesGallery() {
               onMouseLeave={() => setHovered(null)}
               style={{
                 display: 'block',
-                background: hovered === example.slug ? 'rgba(255,255,255,0.03)' : '#080808',
+                background: hovered === example.slug
+                  ? 'rgba(218,145,0,0.06)'
+                  : '#F5F0E1',
                 padding: 'clamp(1.5rem,3vw,2.5rem)',
                 minHeight: 220,
                 textDecoration: 'none',
@@ -131,7 +133,7 @@ export default function ExamplesGallery() {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  background: `radial-gradient(circle at 0% 100%, ${example.accentColor}12, transparent 60%)`,
+                  background: `radial-gradient(circle at 0% 100%, ${example.accentColor}20, transparent 60%)`,
                   opacity: hovered === example.slug ? 1 : 0,
                   transition: 'opacity 400ms',
                   pointerEvents: 'none',
@@ -149,9 +151,9 @@ export default function ExamplesGallery() {
               >
                 <span
                   style={{
-                    fontFamily: 'var(--font-jetbrains)',
-                    fontSize: 'var(--text-xs)',
-                    color: 'rgba(240,240,238,0.32)',
+                    fontFamily: 'var(--font-caprasimo)',
+                    fontSize: '0.65rem',
+                    color: 'rgba(87,70,52,0.32)',
                     letterSpacing: '0.08em',
                   }}
                 >
@@ -159,12 +161,12 @@ export default function ExamplesGallery() {
                 </span>
                 <span
                   style={{
-                    fontFamily: 'var(--font-jetbrains)',
-                    fontSize: 'var(--text-xs)',
+                    fontFamily: 'var(--font-caprasimo)',
+                    fontSize: '0.65rem',
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
                     padding: '0.2rem 0.6rem',
-                    border: `1px solid ${example.accentColor}40`,
+                    border: `1px solid ${example.accentColor}50`,
                     color: example.accentColor,
                   }}
                 >
@@ -175,11 +177,11 @@ export default function ExamplesGallery() {
               {/* Title + description */}
               <h3
                 style={{
-                  fontFamily: 'var(--font-syne)',
-                  fontWeight: 700,
+                  fontFamily: 'var(--font-abril)',
+                  fontWeight: 400,
                   fontSize: 'clamp(1.1rem,2vw,1.375rem)',
-                  letterSpacing: '-0.02em',
-                  color: '#F0F0EE',
+                  letterSpacing: '-0.01em',
+                  color: '#574634',
                   marginBottom: '0.5rem',
                   lineHeight: 1.15,
                 }}
@@ -188,9 +190,9 @@ export default function ExamplesGallery() {
               </h3>
               <p
                 style={{
-                  fontFamily: 'var(--font-inter)',
+                  fontFamily: 'var(--font-fraunces)',
                   fontSize: 'var(--text-sm)',
-                  color: 'rgba(240,240,238,0.4)',
+                  color: 'rgba(87,70,52,0.55)',
                   lineHeight: 1.6,
                   marginBottom: '1.5rem',
                 }}
@@ -213,9 +215,9 @@ export default function ExamplesGallery() {
                   position: 'absolute',
                   bottom: 'clamp(1.5rem,3vw,2.5rem)',
                   right: 'clamp(1.5rem,3vw,2.5rem)',
-                  fontFamily: 'var(--font-syne)',
+                  fontFamily: 'var(--font-fraunces)',
                   fontSize: '1.25rem',
-                  color: '#BFFF00',
+                  color: '#DA9100',
                   opacity: hovered === example.slug ? 1 : 0,
                   transform: hovered === example.slug ? 'translate(0,0)' : 'translate(-8px, 8px)',
                   transition: 'opacity 300ms, transform 300ms cubic-bezier(0.16,1,0.3,1)',
