@@ -19,7 +19,7 @@ export default function Hero() {
     const h1 = h1Ref.current
     if (!h1) return
 
-    const split = new SplitText(h1, { type: 'chars', mask: true })
+    const split = new SplitText(h1, { type: 'chars', mask: 'chars' })
     const delay = sessionStorage.getItem('loaded') ? 0.1 : 1.85
 
     const ctx = gsap.context(() => {

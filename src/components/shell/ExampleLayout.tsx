@@ -2,7 +2,7 @@
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { useState } from 'react'
-import PreLoader from './PreLoader'
+import ExamplePreLoader from './ExamplePreLoader'
 import type { Example } from '@/lib/examples'
 
 export default function ExampleLayout({
@@ -12,20 +12,20 @@ export default function ExampleLayout({
   children: React.ReactNode
   example: Example
 }) {
-  const [showPreLoader, setShowPreLoader] = useState(true)
+  const [showLoader, setShowLoader] = useState(true)
 
   return (
     <>
-      {showPreLoader && (
-        <PreLoader
+      {showLoader && (
+        <ExamplePreLoader
           accentColor={example.accentColor}
           title={example.title}
-          onComplete={() => setShowPreLoader(false)}
+          onComplete={() => setShowLoader(false)}
         />
       )}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: showPreLoader ? 0 : 1 }}
+        animate={{ opacity: showLoader ? 0 : 1 }}
         transition={{ duration: 0.4 }}
       >
         {/* Back button */}
